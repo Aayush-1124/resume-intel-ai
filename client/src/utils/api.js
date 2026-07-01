@@ -1,4 +1,12 @@
-const BASE = '/api';
+const getBaseUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_URL;
+  if (envUrl) {
+    return envUrl.endsWith('/api') ? envUrl : `${envUrl}/api`;
+  }
+  return '/api';
+};
+
+const BASE = getBaseUrl();
 
 export const api = {
   /** Parse DOCX (or PDF) resume via AI */
