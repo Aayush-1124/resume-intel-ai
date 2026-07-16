@@ -15,20 +15,19 @@
 
 | Feature | Description |
 |---|---|
-| **PDF / DOCX Parser** | Upload any resume → Gemini AI extracts structured JSON (Personal, Experience, Projects, Education, Skills) |
+| **PDF / DOCX Parser** | Upload any resume (PDF or DOCX format, up to **10 MB**) → Gemini AI extracts structured JSON. Every type of these files can be parsed accurately! |
 | **6 Resume Templates** | Classic, Modern, Minimal, Executive, Tech (Impact), Compact — live preview with instant switching |
 | **Multi-Step Form** | 6-step editor — Personal, Experience, Projects, Education, Skills, AI Optimizer |
 | **AI Tailor Engine** | Paste a job description → AI rewrites only weak bullets to match JD keywords (50–70% fewer tokens via hybrid approach) |
 | **ATS Scorer** | Weighted keyword-match gives a 0–100% ATS score + lists missing keywords + actionable remarks |
 | **Smart Skill Inject** | One-click injection of missing JD keywords into Skills using a built-in tech taxonomy (zero AI calls) |
 | **Diff Preview** | Inline accept/reject individual AI-tailored bullets before committing changes |
-| **PDF Export** | Client-side `react-to-print` — vector text, selectable content, proper A4/Letter page sizing |
-| **DOCX Export** | Download resume as a `.doc` file for Word editing |
+| **Export Options** | Download your resume in **2 options (PDF and DOCX)** — available and working flawlessly for *every single template*! |
 | **Dark / Light Theme** | Full dual-theme with system preference detection and smooth transitions |
 | **Auto-Save** | All edits debounced and persisted to `localStorage` — no auth needed |
 | **Fully Responsive** | Mobile-first layout with Editor / Preview tab switcher on small screens |
 | **Template Shuffler** | Floating shuffle button for instant random template switching |
-| **Job Search** | Integrated job board powered by SerpApi |
+| **Find Jobs & Match** | Integrated "Find Jobs" dashboard powered by SerpApi to match your tailored resume to real-world job listings |
 
 ---
 
