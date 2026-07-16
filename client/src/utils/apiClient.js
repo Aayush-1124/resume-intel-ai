@@ -1,7 +1,13 @@
 /**
  * Global API Client & Interceptor
  */
-export const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+// Clean up trailing slashes
+let base = (import.meta.env.VITE_API_URL || '/api').replace(/\/+$/, '');
+// Ensure it points to /api if it's a remote URL that doesn't include it
+if (base.startsWith('http') && !base.endsWith('/api')) {
+  base += '/api';
+}
+export const API_BASE_URL = base;
 
 /**
  * Dispatch a custom event to show a toast notification globally
