@@ -36,7 +36,7 @@ export default function LandingPage({ onNavigate, onResumeLoaded }) {
       setProgress(40);
       const result = await api.parseDoc(file);
       setProgress(90);
-      onResumeLoaded(result.data);
+      onResumeLoaded(result);
       setProgress(100);
     } catch (err) {
       setError(err.message);
