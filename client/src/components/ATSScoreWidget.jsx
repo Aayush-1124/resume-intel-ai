@@ -15,7 +15,7 @@ export default function ATSScoreWidget({ score }) {
     <motion.div
       initial={{ opacity: 0, scale: 0.85, y: -6 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
-      className="absolute top-5 right-5 glass-panel py-2 px-4 rounded-full border border-outline-variant/20 flex items-center gap-3 shadow-lg"
+      className="absolute top-3 right-3 sm:top-5 sm:right-5 glass-panel py-2 px-3 sm:px-4 rounded-full border border-outline-variant/20 flex items-center gap-2 sm:gap-3 shadow-lg max-w-[90vw] overflow-hidden"
       style={{ backdropFilter: 'blur(16px)', zIndex: 10 }}
       role="status"
       aria-label={`ATS Score: ${score}% — ${label}`}

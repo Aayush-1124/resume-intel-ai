@@ -69,22 +69,22 @@ export default function LandingPage({ onNavigate, onResumeLoaded }) {
             </span>
           </div>
 
-          <h1 className="text-[3.5rem] font-extrabold tracking-tighter leading-tight mb-6 text-on-surface max-w-2xl">
+          <h1 className="text-[2.5rem] sm:text-[3rem] lg:text-[4rem] font-extrabold tracking-tighter leading-tight mb-6 text-on-surface max-w-2xl">
             Surgical Precision for your{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-container to-primary">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-tertiary">
               Career Path.
             </span>
           </h1>
 
-          <p className="text-[1.125rem] leading-relaxed text-on-surface-variant mb-10 max-w-xl">
+          <p className="text-base sm:text-lg lg:text-[1.125rem] leading-relaxed text-on-surface-variant mb-10 max-w-xl">
             Maximize your ATS score and dynamically tailor your resume in real-time to match any job description using advanced AI.
           </p>
 
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
             <motion.button
               whileTap={{ scale: 0.97 }}
               onClick={() => onNavigate('dashboard')}
-              className="px-8 py-4 bg-gradient-to-br from-primary-container to-primary text-on-primary font-bold rounded-xl hover:opacity-90 transition-all duration-300 flex items-center gap-2"
+              className="w-full sm:w-auto px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold rounded-xl hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 flex items-center justify-center gap-2"
               aria-label="Build resume from scratch"
             >
               Build from Scratch <ArrowRight size={16} />
@@ -92,7 +92,7 @@ export default function LandingPage({ onNavigate, onResumeLoaded }) {
             <motion.button
               whileTap={{ scale: 0.97 }}
               onClick={() => fileInputRef.current?.click()}
-              className="px-8 py-4 bg-surface-container-high text-on-surface font-semibold rounded-xl hover:bg-surface-container-highest transition-all duration-300"
+              className="w-full sm:w-auto px-8 py-4 bg-surface-container-high text-on-surface font-semibold rounded-xl hover:bg-surface-container-highest border border-outline-variant/20 hover:border-outline-variant/40 transition-all duration-300 flex items-center justify-center"
             >
               Upload & Parse Resume
             </motion.button>
@@ -113,7 +113,7 @@ export default function LandingPage({ onNavigate, onResumeLoaded }) {
 
         {/* ── Upload Zone ── */}
         <motion.div
-          className="lg:col-span-5"
+          className="lg:col-span-5 w-full mt-10 lg:mt-0"
           initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.15 }}
         >
@@ -196,17 +196,17 @@ export default function LandingPage({ onNavigate, onResumeLoaded }) {
       </section>
 
       {/* ── Feature Bento ── */}
-      <section className="max-w-7xl mx-auto px-8 mt-40" aria-labelledby="features-heading">
-        <div className="mb-16">
-          <h2 id="features-heading" className="text-3xl font-bold tracking-tighter text-on-surface mb-2">
+      <section className="max-w-7xl mx-auto px-6 sm:px-8 mt-32 sm:mt-40" aria-labelledby="features-heading">
+        <div className="mb-12 sm:mb-16">
+          <h2 id="features-heading" className="text-2xl sm:text-3xl font-bold tracking-tighter text-on-surface mb-3 sm:mb-2">
             Engineered Performance
           </h2>
-          <p className="text-on-surface-variant max-w-lg">
+          <p className="text-sm sm:text-base text-on-surface-variant max-w-lg leading-relaxed">
             Advanced metrics to ensure your profile stands out in the digital stack.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {/* ATS Score demo card */}
           <motion.div
             whileHover={{ backgroundColor: 'var(--surface-container)' }}
@@ -222,16 +222,16 @@ export default function LandingPage({ onNavigate, onResumeLoaded }) {
               </div>
               <Target size={22} className="text-on-surface-variant" />
             </div>
-            <div className="flex items-center gap-10">
-              <div className="relative w-28 h-28 flex items-center justify-center shrink-0">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-8 sm:gap-10">
+              <div className="relative w-24 h-24 sm:w-28 sm:h-28 flex items-center justify-center shrink-0">
                 <svg className="w-full h-full -rotate-90" viewBox="0 0 112 112">
                   <circle cx="56" cy="56" r="48" fill="transparent" stroke="var(--surface-container-highest)" strokeWidth="7" />
                   <circle cx="56" cy="56" r="48" fill="transparent" stroke="var(--primary)"
                     strokeWidth="7" strokeDasharray="301.6" strokeDashoffset="75.4" strokeLinecap="round" />
                 </svg>
-                <span className="absolute text-2xl font-bold text-on-surface">75%</span>
+                <span className="absolute text-xl sm:text-2xl font-bold text-on-surface">75%</span>
               </div>
-              <ul className="space-y-3 flex-1">
+              <ul className="space-y-3 flex-1 w-full">
                 {[
                   { ok: true, text: 'Semantic density optimized' },
                   { ok: true, text: 'Structure verified' },

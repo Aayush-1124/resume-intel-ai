@@ -8,7 +8,7 @@ import { sanitizeField, sanitizeUrl } from '../../utils/validation.js';
 function Field({ label, id, type = 'text', value, onChange, onBlur, placeholder, required, error, maxLength, hint }) {
   return (
     <div>
-      <label htmlFor={id} className="block text-[0.6875rem] uppercase tracking-widest font-medium text-on-surface-variant mb-2">
+      <label htmlFor={id} className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5 block">
         {label}
         {required && <span className="text-error ml-1" aria-hidden="true">*</span>}
       </label>
@@ -20,7 +20,7 @@ function Field({ label, id, type = 'text', value, onChange, onBlur, placeholder,
         placeholder={placeholder}
         required={required} aria-required={required}
         aria-describedby={error ? `${id}-err` : undefined}
-        className={`field-input ${error ? 'error-ring' : ''}`}
+        className={`w-full rounded-xl border border-outline-variant/20 bg-surface-container/50 backdrop-blur-sm px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-all placeholder:text-on-surface-variant/40 ${error ? 'border-error/50 focus:ring-error/40' : ''}`}
       />
       <AnimatePresence>
         {error && (
@@ -77,22 +77,22 @@ export default function PersonalForm({ data, onChange, onNext }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }}
-      className="max-w-2xl mx-auto space-y-10"
+      className="max-w-2xl mx-auto space-y-8 px-1"
     >
       <header>
-        <h1 className="text-3xl font-bold tracking-tighter text-on-surface">Personal Information</h1>
-        <p className="text-on-surface-variant mt-2 leading-relaxed">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tighter text-on-surface">Personal Information</h1>
+        <p className="text-on-surface-variant mt-2 leading-relaxed text-sm sm:text-base">
           Your professional identity — make every detail count.
         </p>
       </header>
 
-      <div className="glass-panel p-8 rounded-xl border border-outline-variant/10 space-y-6">
+      <div className="rounded-2xl border border-outline-variant/10 bg-surface-container-low/80 backdrop-blur-sm p-5 sm:p-6 space-y-5">
         <Field label="Full Name" id="fullName" value={data.fullName}
           onChange={update('fullName')} onBlur={blur('fullName')}
           placeholder="e.g. Alexandra Chen" required maxLength={100}
           error={errors.fullName} />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <Field label="Email" id="email" type="email" value={data.email}
             onChange={update('email')} onBlur={blur('email')}
             placeholder="alex@example.com" required maxLength={200}
@@ -103,7 +103,7 @@ export default function PersonalForm({ data, onChange, onNext }) {
             error={errors.phone} hint="Optional — include country code" />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <Field label="Location" id="location" value={data.location}
             onChange={update('location')} onBlur={blur('location')}
             placeholder="San Francisco, CA" maxLength={100}
@@ -121,8 +121,8 @@ export default function PersonalForm({ data, onChange, onNext }) {
 
         {/* Summary */}
         <div>
-          <div className="flex justify-between mb-2">
-            <label htmlFor="summary" className="block text-[0.6875rem] uppercase tracking-widest font-medium text-on-surface-variant">
+          <div className="flex justify-between mb-1.5">
+            <label htmlFor="summary" className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant">
               Professional Summary
             </label>
             <span className="text-[0.6rem] text-on-surface-variant/50">
@@ -135,7 +135,7 @@ export default function PersonalForm({ data, onChange, onNext }) {
             onBlur={blur('summary')}
             maxLength={1000}
             placeholder="A concise 2-3 sentence pitch of your career, key skills, and unique value proposition..."
-            className={`field-input resize-none ${errors.summary ? 'error-ring' : ''}`}
+            className={`w-full rounded-xl border border-outline-variant/20 bg-surface-container/50 backdrop-blur-sm px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-all placeholder:text-on-surface-variant/40 resize-none ${errors.summary ? 'border-error/50 focus:ring-error/40' : ''}`}
             aria-describedby={errors.summary ? 'summary-err' : undefined}
           />
           <AnimatePresence>
@@ -151,10 +151,10 @@ export default function PersonalForm({ data, onChange, onNext }) {
         </div>
       </div>
 
-      <div className="flex justify-end">
+      <div className="flex flex-col sm:flex-row justify-end gap-3 pt-2">
         <button
           onClick={handleNext}
-          className="px-10 py-3 rounded-xl bg-primary-container text-on-primary-container font-bold text-sm active:scale-95 shadow-lg shadow-primary-container/20 hover:opacity-90 transition-all"
+          className="w-full sm:w-auto px-10 py-3 rounded-xl bg-primary-container text-on-primary-container font-bold text-sm active:scale-95 shadow-lg shadow-primary-container/20 hover:opacity-90 transition-all"
           aria-label="Proceed to Experience section"
         >
           Next Step →

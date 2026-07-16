@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react';
 export function useTheme() {
   const [theme, setTheme] = useState(() => {
     try {
-      return localStorage.getItem('resumeintel_theme') || 'dark';
+      return localStorage.getItem('resumeintel_theme') || 'light';
     } catch {
-      return 'dark';
+      return 'light';
     }
   });
 

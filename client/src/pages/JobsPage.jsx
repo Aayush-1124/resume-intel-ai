@@ -37,7 +37,7 @@ function JobCard({ job, index }) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.04 }}
-      className="group bg-surface-container-low rounded-2xl p-6 border border-outline-variant/10 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
+      className="group bg-surface-container-low/80 backdrop-blur-sm rounded-2xl p-6 border border-outline-variant/10 hover:border-primary/20 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300"
     >
       {/* Header */}
       <div className="flex items-start gap-4 mb-3">
@@ -193,10 +193,10 @@ export default function JobsPage({ resumeData, onNavigate }) {
   };
 
   return (
-    <div className="flex h-[calc(100vh-72px)] overflow-hidden">
+    <div className="flex flex-col md:flex-row h-[calc(100vh-72px)] overflow-hidden">
 
       {/* ── Left: Search Sidebar ── */}
-      <aside className="w-[320px] shrink-0 bg-surface-container border-r border-outline-variant/10 flex flex-col overflow-y-auto custom-scrollbar">
+      <aside className="w-full md:w-[320px] shrink-0 bg-surface-container border-b md:border-b-0 md:border-r border-outline-variant/10 flex flex-col overflow-y-auto md:custom-scrollbar max-h-[50vh] md:max-h-none">
 
         {/* Back button */}
         <div className="p-4 pb-0">
@@ -209,20 +209,20 @@ export default function JobsPage({ resumeData, onNavigate }) {
         </div>
 
         {/* Header */}
-        <div className="px-6 pt-6 pb-4">
+        <div className="px-4 sm:px-6 pt-4 sm:pt-6 pb-3 sm:pb-4">
           <div className="flex items-center gap-2.5 mb-1">
             <div className="bg-primary-container p-1.5 rounded-xl">
               <Briefcase size={16} className="text-on-primary-container" />
             </div>
-            <h1 className="text-xl font-extrabold text-on-surface tracking-tight">Find Jobs</h1>
+            <h1 className="text-xl sm:text-2xl font-extrabold text-on-surface tracking-tight">Find Jobs</h1>
           </div>
           <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
-            Search thousands of platforms instantly. Results are cached for 24 hours.
+            Search thousands of platforms instantly.
           </p>
         </div>
 
         {/* Search Form */}
-        <form onSubmit={handleSearch} className="px-6 space-y-4 flex-1">
+        <form onSubmit={handleSearch} className="px-4 sm:px-6 space-y-3 sm:space-y-4 flex-1 pb-4">
           {/* Job title / keywords */}
           <div>
             <label className="text-[0.65rem] font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5 block">
@@ -334,30 +334,15 @@ export default function JobsPage({ resumeData, onNavigate }) {
           </AnimatePresence>
         </form>
 
-        {/* Footer info */}
-        <div className="px-6 py-4 mt-auto border-t border-outline-variant/10">
-          {resultMeta && (
-            <div className="text-[0.6rem] text-on-surface-variant space-y-0.5">
-              <p>{resultMeta.total} job{resultMeta.total !== 1 ? 's' : ''} found</p>
-              {resultMeta.cached && (
-                <p className="flex items-center gap-1 text-tertiary">
-                  <Zap size={10} /> Served from cache
-                </p>
-              )}
-            </div>
-          )}
-          <p className="text-[0.6rem] text-on-surface-variant/40 mt-2">
-            Powered by Google Jobs Engine
-          </p>
-        </div>
+
       </aside>
 
       {/* ── Right: Job Feed ── */}
-      <main className="flex-1 overflow-y-auto custom-scrollbar bg-background p-8">
+      <main className="flex-1 overflow-y-auto custom-scrollbar bg-background p-4 sm:p-6 lg:p-8">
 
         {/* Loading Skeleton */}
         {isLoading && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {Array.from({ length: 6 }).map((_, i) => (
               <SkeletonCard key={i} />
             ))}
@@ -367,20 +352,20 @@ export default function JobsPage({ resumeData, onNavigate }) {
         {/* Results */}
         {!isLoading && jobs.length > 0 && (
           <>
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 sm:mb-6 gap-2">
               <div>
-                <h2 className="text-lg font-bold text-on-surface">
+                <h2 className="text-base sm:text-lg font-bold text-on-surface">
                   {resultMeta?.total || jobs.length} Results
                 </h2>
                 <p className="text-xs text-on-surface-variant">
-                  for "{query}"{location ? ` in ${location}` : ''}
+                  for &quot;{query}&quot;{location ? ` in ${location}` : ''}
                 </p>
               </div>
-              <div className="flex items-center gap-1.5 text-[0.65rem] text-on-surface-variant bg-surface-container-low px-3 py-1.5 rounded-full border border-outline-variant/10">
+              <div className="flex items-center gap-1.5 text-[0.65rem] text-on-surface-variant bg-surface-container-low px-3 py-1.5 rounded-full border border-outline-variant/10 self-start sm:self-auto">
                 <Filter size={11} /> {jobs.length} shown
               </div>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {jobs.map((job, i) => (
                 <JobCard key={job.id || i} job={job} index={i} />
               ))}

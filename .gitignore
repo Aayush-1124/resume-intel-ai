@@ -27,3 +27,8 @@ npm-debug.log*
 
 # Uploads (temp files)
 server/uploads/
+
+.agents/
+design_system_output.md
+modify_preview.js
+skills-lock.json

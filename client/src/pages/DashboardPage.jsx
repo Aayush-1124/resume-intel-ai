@@ -14,8 +14,9 @@ import ATSScoreWidget from '../components/ATSScoreWidget.jsx';
 import TemplateShuffler from '../components/TemplateShuffler.jsx';
 import DiffPreview from '../components/DiffPreview.jsx';
 import JobSuccessModal from '../components/JobSuccessModal.jsx';
+import ProjectsForm from '../components/form-steps/ProjectsForm.jsx';
 
-const STEPS = ['personal', 'experience', 'education', 'skills', 'optimizer'];
+const STEPS = ['personal', 'experience', 'projects', 'education', 'skills', 'optimizer'];
 
 export default function DashboardPage({ resumeData, onUpdate, currentStep, onStepChange, onNavigate }) {
   const printRef  = useRef(null);
@@ -24,6 +25,7 @@ export default function DashboardPage({ resumeData, onUpdate, currentStep, onSte
   const [scale, setScale] = useState(0.5);
   const [paperSize, setPaperSize] = useState('a4');
   const [showJobModal, setShowJobModal] = useState(false);
+  const [mobileTab, setMobileTab] = useState('form');
 
   useEffect(() => {
     const el = previewContainerRef.current;
@@ -39,10 +41,11 @@ export default function DashboardPage({ resumeData, onUpdate, currentStep, onSte
     return () => observer.disconnect();
   }, []);
 
-  /* ── Print handler (react-to-print v2 API) ── */
+  /* ── Print/PDF handler (react-to-print v2 API) ── */
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
     documentTitle: `${resumeData.personal?.fullName || 'Resume'} — ResumeIntel`,
+    onAfterPrint: () => setShowJobModal(true),
     pageStyle: `
       @page { size: ${paperSize === 'letter' ? 'letter' : 'A4'}; margin: 0; }
       @media print {
@@ -52,35 +55,11 @@ export default function DashboardPage({ resumeData, onUpdate, currentStep, onSte
     `,
   });
 
-  const handleDownloadPdf = async () => {
-    // We will dynamically import html2canvas and jsPDF to save initial bundle size
-    try {
-      const html2canvas = (await import('html2canvas')).default;
-      const { jsPDF } = await import('jspdf');
-      
-      const element = printRef.current;
-      if (!element) return;
-      
-      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
-      const imgData = canvas.toDataURL('image/png');
-      
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'mm',
-        format: paperSize
-      });
-      
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-      
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`${resumeData.personal?.fullName || 'Resume'} — ResumeIntel.pdf`);
-      setShowJobModal(true);
-    } catch (err) {
-      console.error('Download failed:', err);
-      // Fallback to print dialog
-      handlePrint();
-    }
+  const handleDownloadPdf = () => {
+    // We now rely entirely on the browser's native print-to-pdf engine.
+    // This guarantees perfectly crisp vector text, selectable content, 
+    // and eliminates blurry html2canvas image scaling issues.
+    handlePrint();
   };
 
   const handleDownloadDoc = () => {
@@ -129,21 +108,40 @@ export default function DashboardPage({ resumeData, onUpdate, currentStep, onSte
   };
 
   return (
-    <main className="flex h-[calc(100vh-72px)] overflow-hidden relative" role="main">
+    <main className="flex flex-col lg:flex-row h-[calc(100vh-72px)] overflow-hidden relative" role="main">
+      
+      {/* Mobile Tab Switcher */}
+      <div className="lg:hidden flex shrink-0 border-b border-outline-variant/10 bg-surface-container shadow-sm z-10">
+        <button 
+          className={`flex-1 py-3.5 text-xs font-extrabold uppercase tracking-widest transition-colors ${mobileTab === 'form' ? 'text-primary bg-primary/10 border-b-2 border-primary' : 'text-on-surface-variant hover:bg-surface-container-high'}`}
+          onClick={() => setMobileTab('form')}
+        >
+          Editor
+        </button>
+        <button 
+          className={`flex-1 py-3.5 text-xs font-extrabold uppercase tracking-widest transition-colors ${mobileTab === 'preview' ? 'text-primary bg-primary/10 border-b-2 border-primary' : 'text-on-surface-variant hover:bg-surface-container-high'}`}
+          onClick={() => setMobileTab('preview')}
+        >
+          Preview
+        </button>
+      </div>
 
-      {/* ── Left: Step Nav ── */}
-      <FormSidebar 
-        currentStep={currentStep} 
-        onStepChange={onStepChange} 
-        onDownloadPdf={handleDownloadPdf} 
-        onDownloadDoc={handleDownloadDoc}
-      />
+      {/* ── Left & Centre: Editor ── */}
+      <div className={`flex flex-col lg:flex-row w-full lg:flex-1 h-full overflow-hidden ${mobileTab === 'form' ? 'flex' : 'hidden lg:flex'}`}>
+        
+        {/* Step Nav */}
+        <FormSidebar 
+          currentStep={currentStep} 
+          onStepChange={onStepChange} 
+          onDownloadPdf={handleDownloadPdf} 
+          onDownloadDoc={handleDownloadDoc}
+        />
 
-      {/* ── Centre: Form ── */}
-      <section
-        className="flex-1 bg-surface-container-low overflow-y-auto custom-scrollbar p-10 lg:p-12"
-        aria-label="Resume builder form"
-      >
+        {/* Form Content */}
+        <section
+          className="flex-1 bg-surface-container-low overflow-y-auto custom-scrollbar p-4 sm:p-6 lg:p-12 w-full"
+          aria-label="Resume builder form"
+        >
         <AnimatePresence mode="wait">
           {currentStep === 'personal' && (
             <PersonalForm key="personal"
@@ -155,6 +153,12 @@ export default function DashboardPage({ resumeData, onUpdate, currentStep, onSte
             <ExperienceForm key="experience"
               data={resumeData.experience}
               onChange={(experience) => onUpdate({ ...resumeData, experience })}
+              onNext={goNext} onBack={goBack} />
+          )}
+          {currentStep === 'projects' && (
+            <ProjectsForm key="projects"
+              data={resumeData.projects}
+              onChange={(projects) => onUpdate({ ...resumeData, projects })}
               onNext={goNext} onBack={goBack} />
           )}
           {currentStep === 'education' && (
@@ -175,14 +179,18 @@ export default function DashboardPage({ resumeData, onUpdate, currentStep, onSte
               onUpdate={onUpdate}
               onBack={goBack}
               onTailorComplete={handleTailorComplete}
-              onFinish={() => onStepChange('personal')} />
+              onFinish={() => {
+                onStepChange('personal');
+                setShowJobModal(true);
+              }} />
           )}
         </AnimatePresence>
       </section>
+      </div>
 
       {/* ── Right: Live Preview ── */}
       <aside
-        className="w-[34%] h-full bg-surface-dim relative flex flex-col items-center pt-16 pb-6 px-6"
+        className={`w-full lg:w-[34%] h-full bg-surface-dim relative flex flex-col items-center pt-8 lg:pt-16 pb-6 px-4 lg:px-6 z-0 ${mobileTab === 'preview' ? 'flex' : 'hidden lg:flex'}`}
         aria-label="Live resume preview"
         style={{ borderLeft: '1px solid rgba(70,69,85,0.12)' }}
       >
@@ -193,7 +201,7 @@ export default function DashboardPage({ resumeData, onUpdate, currentStep, onSte
         <div className="flex items-center gap-1.5 mb-4 self-start ml-1">
           <LayoutTemplate size={13} className="text-on-surface-variant opacity-50" />
           <span className="text-[0.6rem] uppercase tracking-widest font-medium text-on-surface-variant opacity-50 capitalize">
-            {resumeData.selectedTemplate || 'modern'} template
+            {resumeData.selectedTemplate || 'executive'} template
           </span>
         </div>
 
@@ -208,7 +216,7 @@ export default function DashboardPage({ resumeData, onUpdate, currentStep, onSte
                   <ResumePreview
                     ref={printRef}
                     resumeData={resumeData}
-                    selectedTemplate={resumeData.selectedTemplate || 'modern'}
+                    selectedTemplate={resumeData.selectedTemplate || 'executive'}
                     paperSize={paperSize}
                   />
                 </motion.div>
@@ -219,9 +227,25 @@ export default function DashboardPage({ resumeData, onUpdate, currentStep, onSte
 
         {/* Template Shuffler floating bar */}
         <TemplateShuffler
-          selected={resumeData.selectedTemplate || 'modern'}
+          selected={resumeData.selectedTemplate || 'executive'}
           onSelect={handleTemplateSelect}
         />
+
+        {/* Mobile Export Bar */}
+        <div className="lg:hidden w-full mt-4 flex gap-3">
+          <button
+            onClick={handleDownloadPdf}
+            className="flex-1 py-3 bg-gradient-to-r from-primary to-primary-container text-on-primary rounded-xl font-bold text-xs uppercase tracking-widest shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
+          >
+            PDF
+          </button>
+          <button
+            onClick={handleDownloadDoc}
+            className="flex-1 py-3 bg-surface-container-highest text-on-surface rounded-xl font-bold text-xs uppercase tracking-widest shadow-sm hover:bg-surface-container-high border border-outline-variant/20 transition-all flex items-center justify-center gap-2"
+          >
+            DOC
+          </button>
+        </div>
       </aside>
       
       <AnimatePresence>

@@ -206,8 +206,14 @@
    ══════════════════════════════════════════════════════════ */
 @media print {
   @page {
-    size: A4;
     margin: 0;
+  }
+
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    height: 100%;
   }
 
   body * { 
@@ -223,11 +229,10 @@
     position: absolute;
     left: 0; 
     top: 0;
-    width: 210mm !important;
-    min-height: 297mm !important;
-    background: white !important;
+    width: 100% !important;
+    min-height: 100% !important;
     box-shadow: none !important;
     border-radius: 0 !important;
-    overflow: hidden !important;
+    padding: 0 !important;
   }
 }

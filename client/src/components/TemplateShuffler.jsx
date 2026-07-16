@@ -22,13 +22,13 @@ export default function TemplateShuffler({ selected, onSelect }) {
            setIsHovered(false);
         }}
         aria-pressed={isActive}
-        className={`flex flex-col items-center gap-1.5 p-2 rounded-xl transition-all duration-200 ${
+        className={`flex flex-col items-center gap-1 sm:gap-1.5 p-1.5 sm:p-2 rounded-xl transition-all duration-200 ${
           isActive
             ? 'text-primary bg-primary/10'
             : 'text-on-surface-variant hover:text-primary hover:bg-primary/5'
         }`}
       >
-        <div className="w-8 h-10 rounded-sm overflow-hidden flex-shrink-0 flex items-center justify-center" style={{ background: '#fff', boxShadow: '0 1px 4px rgba(0,0,0,0.12)' }}>
+        <div className="w-7 h-9 sm:w-8 sm:h-10 rounded-sm overflow-hidden flex-shrink-0 flex items-center justify-center" style={{ background: '#fff', boxShadow: '0 1px 4px rgba(0,0,0,0.12)' }}>
           {t.key === 'classic'   && <ClassicThumb />}
           {t.key === 'modern'    && <ModernThumb />}
           {t.key === 'minimal'   && <MinimalThumb />}
@@ -43,7 +43,7 @@ export default function TemplateShuffler({ selected, onSelect }) {
 
   return (
     <div
-      className="absolute bottom-6 right-6 z-50 flex items-end"
+      className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex items-end max-w-[95vw]"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -54,7 +54,7 @@ export default function TemplateShuffler({ selected, onSelect }) {
             animate={{ opacity: 1, x: 0, scale: 1 }}
             exit={{ opacity: 0, x: 10, scale: 0.95 }}
             transition={{ duration: 0.15 }}
-            className="absolute bottom-0 right-[calc(100%+16px)] bg-surface-container-high rounded-[20px] border border-outline-variant/20 shadow-2xl p-3 grid grid-cols-3 gap-2 w-max before:content-[''] before:absolute before:left-full before:top-0 before:w-[30px] before:h-full before:bg-transparent"
+            className="absolute bottom-0 right-[calc(100%+8px)] sm:right-[calc(100%+16px)] bg-surface-container-high/90 backdrop-blur-xl rounded-[20px] border border-outline-variant/20 shadow-2xl p-2 sm:p-3 grid grid-cols-3 gap-1.5 sm:gap-2 w-max max-w-[min(220px,80vw)] before:content-[''] before:absolute before:left-full before:top-0 before:w-[30px] before:h-full before:bg-transparent"
           >
             {TEMPLATES.map(renderTemplateBtn)}
           </motion.div>

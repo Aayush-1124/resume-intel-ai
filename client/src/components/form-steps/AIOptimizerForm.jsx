@@ -349,7 +349,7 @@ export default function AIOptimizerForm({ resumeData, onUpdate, onBack, onTailor
         <button onClick={onBack} className="px-8 py-3 rounded-xl bg-surface-container-high text-on-surface font-medium text-sm active:scale-95 hover:bg-surface-container-highest">← Back</button>
         <button onClick={onFinish}
           className="px-10 py-3 rounded-xl bg-gradient-to-br from-primary-container to-primary text-on-primary font-bold text-sm active:scale-95 shadow-lg hover:opacity-90 flex items-center gap-2">
-          <CheckCircle size={16} /> Finish & Preview
+          <CheckCircle size={16} /> Finish
         </button>
       </div>
     </motion.div>

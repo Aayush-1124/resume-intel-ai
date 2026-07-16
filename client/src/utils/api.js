@@ -1,80 +1,61 @@
-const getBaseUrl = () => {
-  const envUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_URL;
-  if (envUrl) {
-    return envUrl.endsWith('/api') ? envUrl : `${envUrl}/api`;
-  }
-  return '/api';
-};
-
-const BASE = getBaseUrl();
+import { apiClient } from './apiClient.js';
 
 export const api = {
   /** Parse DOCX (or PDF) resume via AI */
   async parseDoc(file) {
     const fd = new FormData();
     fd.append('resume', file);
-    const res = await fetch(`${BASE}/ai/parse-doc`, { method: 'POST', body: fd });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Document parse failed');
-    return data;
+    // apiClient will automatically parse error responses and handle toasts
+    const data = await apiClient('/ai/parse-doc', {
+      method: 'POST',
+      body: fd,
+    });
+    return data.data; // The server returns { success: true, data: { ... } }
   },
 
   /** Tailor experience bullets + filter skills to a JD */
   async tailorExperience(experience, skills, jobDescription) {
-    const res = await fetch(`${BASE}/ai/tailor`, {
+    const data = await apiClient('/ai/tailor', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ experience, skills, jobDescription }),
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Tailor failed');
-    return data;
+    return data; // Returns { success, data, skills }
   },
 
   /** Calculate ATS score */
   async atsScore(resumeData, jobDescription) {
-    const res = await fetch(`${BASE}/ai/ats-score`, {
+    const data = await apiClient('/ai/ats-score', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ resumeData, jobDescription }),
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'ATS score failed');
-    return data;
+    return data; // Returns { success, score, matched, total, missingKeywords, improvements }
   },
 
   /** AI-powered smart skill injection */
   async organizeSkills(currentSkills, missingKeywords, jobDescription) {
-    const res = await fetch(`${BASE}/ai/organize-skills`, {
+    const data = await apiClient('/ai/organize-skills', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ currentSkills, missingKeywords, jobDescription }),
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Skill organization failed');
-    return data;
+    return data; // Returns { success, technical }
   },
 
   /** Save resume to DB */
   async saveResume(localId, resumeData) {
-    const res = await fetch(`${BASE}/resumes/save`, {
+    const data = await apiClient('/resumes/save', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ localId, ...resumeData }),
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Save failed');
-    return data;
+    return data.data;
   },
 
   /** Search jobs via SerpApi (cached on server) */
   async searchJobs(query, location) {
-    const params = new URLSearchParams({ query });
+    const params = new URLSearchParams({ query: query.trim() });
     if (location?.trim()) params.append('location', location.trim());
-    const res = await fetch(`${BASE}/jobs?${params.toString()}`);
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Job search failed');
-    return data;
+    
+    const data = await apiClient(`/jobs?${params.toString()}`);
+    return data.data; // Returns { jobs, total, cached }
   },
 };
 
@@ -90,6 +71,7 @@ export const defaultResume = {
     summary: '',
   },
   experience: [],
+  projects: [],
   education: [],
   skills: {
     technical: [],
@@ -97,7 +79,7 @@ export const defaultResume = {
     languages: [],
     certifications: [],
   },
-  selectedTemplate: 'modern',
+  selectedTemplate: 'executive', // updated default template
   lastJD: '',
   atsScore: null,
 };

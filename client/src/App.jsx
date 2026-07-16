@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
 import JobsPage from './pages/JobsPage.jsx';
 import TemplateModal from './components/TemplateModal.jsx';
+import ToastContainer from './components/ToastContainer.jsx';
 import { useLocalStorage } from './hooks/useLocalStorage.js';
 import { useTheme } from './hooks/useTheme.js';
 import { defaultResume } from './utils/api.js';
@@ -30,6 +31,11 @@ function normalizeResume(data) {
     education: (data.education || []).map((e) => ({
       ...e,
       id: e.id || crypto.randomUUID(),
+    })),
+    projects: (data.projects || []).map((p) => ({
+      ...p,
+      id: p.id || crypto.randomUUID(),
+      bullets: p.bullets?.length ? p.bullets : [''],
     })),
     skills: { ...emptyTemplate.skills, ...(data.skills || {}) },
   };
@@ -69,6 +75,7 @@ export default function App() {
 
   return (
     <div className={`min-h-screen bg-background text-on-background theme-transition ${theme}`}>
+      <ToastContainer />
       <Navbar
         activePage={page}
         activeStep={currentStep}
@@ -81,7 +88,7 @@ export default function App() {
       <TemplateModal
         isOpen={isTemplateModalOpen}
         onClose={() => setIsTemplateModalOpen(false)}
-        selected={resumeData.selectedTemplate || 'modern'}
+        selected={resumeData.selectedTemplate || 'executive'}
         onSelect={(t) => handleUpdate({ ...resumeData, selectedTemplate: t })}
       />
 

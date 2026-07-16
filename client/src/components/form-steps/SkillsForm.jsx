@@ -38,10 +38,10 @@ function TagInput({ label, tags, onAdd, onRemove, placeholder, color = 'primary'
 
   return (
     <div>
-      <label className="label-style mb-2">{label}</label>
+      <label className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5 block">{label}</label>
 
       {/* Tag chip container */}
-      <div className="min-h-[3rem] bg-surface-container-lowest rounded-xl p-3 flex flex-wrap gap-2 focus-within:ring-[1.5px] focus-within:ring-primary-container transition-all">
+      <div className="min-h-[3rem] rounded-xl border border-outline-variant/20 bg-surface-container/50 backdrop-blur-sm p-3 flex flex-wrap gap-2 focus-within:ring-2 focus-within:ring-primary/40 focus-within:border-primary/50 transition-all">
         <AnimatePresence>
           {tags.map((tag, i) => (
             <motion.span key={tag + i}
@@ -49,7 +49,7 @@ function TagInput({ label, tags, onAdd, onRemove, placeholder, color = 'primary'
               className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border ${COLOR_MAP[color]}`}
             >
               {tag}
-              <button onClick={() => onRemove(i)} aria-label={`Remove ${tag}`} className="hover:opacity-60 transition-opacity">
+              <button onClick={() => onRemove(i)} aria-label={`Remove ${tag}`} className="hover:opacity-60 transition-opacity p-2 -mr-2 -my-2 flex items-center justify-center min-w-[32px] min-h-[32px]">
                 <X size={10} />
               </button>
             </motion.span>
@@ -61,7 +61,7 @@ function TagInput({ label, tags, onAdd, onRemove, placeholder, color = 'primary'
           onBlur={() => input.trim() && commit(input)}
           placeholder={tags.length === 0 ? placeholder : '+ add more'}
           maxLength={80}
-          className="flex-1 min-w-[120px] bg-transparent border-none outline-none text-sm text-on-surface placeholder:text-outline/50"
+          className="flex-1 min-w-[120px] bg-transparent border-none outline-none text-sm text-on-surface placeholder:text-on-surface-variant/40"
           aria-label={`Add ${label}`}
         />
       </div>
@@ -72,7 +72,7 @@ function TagInput({ label, tags, onAdd, onRemove, placeholder, color = 'primary'
         <div className="flex flex-wrap gap-1.5 mt-3">
           {unused.slice(0, 7).map((s) => (
             <button key={s} onClick={() => commit(s)}
-              className="px-2.5 py-1 bg-surface-container text-on-surface-variant text-[0.68rem] rounded-full border border-outline-variant/10 hover:bg-surface-container-high hover:text-primary transition-all"
+              className="px-2.5 py-1 bg-surface-container/60 backdrop-blur-sm text-on-surface-variant text-[0.68rem] rounded-full border border-outline-variant/10 hover:bg-surface-container-high hover:text-primary transition-all"
               aria-label={`Add ${s}`}>
               <Plus size={9} className="inline mr-0.5" />{s}
             </button>
@@ -90,21 +90,21 @@ export default function SkillsForm({ data, onChange, onNext, onBack }) {
 
   return (
     <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }}
-      className="max-w-2xl mx-auto space-y-10">
+      className="max-w-2xl mx-auto space-y-8 px-1">
 
       <header>
-        <h1 className="text-3xl font-bold tracking-tighter text-on-surface">Skills & Competencies</h1>
-        <p className="text-on-surface-variant mt-2 leading-relaxed">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tighter text-on-surface">Skills &amp; Competencies</h1>
+        <p className="text-on-surface-variant mt-2 leading-relaxed text-sm sm:text-base">
           Keywords that bypass ATS filters. Be specific and comprehensive.
         </p>
       </header>
 
-      <div className="glass-panel p-8 rounded-xl border border-outline-variant/10 space-y-8">
+      <div className="rounded-2xl border border-outline-variant/10 bg-surface-container-low/80 backdrop-blur-sm p-5 sm:p-6 space-y-7">
         <TagInput label="Technical Skills"
           tags={data.technical || []} onAdd={addTag('technical')} onRemove={removeTag('technical')}
           placeholder="React, Node.js, Python, AWS…" color="primary" suggestions={SUGGESTIONS.technical} />
 
-        <TagInput label="Languages & Frameworks"
+        <TagInput label="Languages &amp; Frameworks"
           tags={data.languages || []} onAdd={addTag('languages')} onRemove={removeTag('languages')}
           placeholder="TypeScript, GraphQL, Docker…" color="tertiary" suggestions={SUGGESTIONS.languages} />
 
@@ -117,9 +117,9 @@ export default function SkillsForm({ data, onChange, onNext, onBack }) {
           placeholder="AWS Solutions Architect, PMP…" color="error" suggestions={SUGGESTIONS.certifications} />
       </div>
 
-      <div className="flex justify-between items-center pt-4">
-        <button onClick={onBack} className="px-8 py-3 rounded-xl bg-surface-container-high text-on-surface font-medium text-sm active:scale-95 hover:bg-surface-container-highest">← Back</button>
-        <button onClick={onNext} className="px-10 py-3 rounded-xl bg-primary-container text-on-primary-container font-bold text-sm active:scale-95 shadow-lg hover:opacity-90">Next Step →</button>
+      <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-3 pt-2">
+        <button onClick={onBack} className="w-full sm:w-auto px-8 py-3 rounded-xl bg-surface-container-high text-on-surface font-medium text-sm active:scale-95 hover:bg-surface-container-highest transition-all">← Back</button>
+        <button onClick={onNext} className="w-full sm:w-auto px-10 py-3 rounded-xl bg-primary-container text-on-primary-container font-bold text-sm active:scale-95 shadow-lg hover:opacity-90 transition-all">Next Step →</button>
       </div>
     </motion.div>
   );
