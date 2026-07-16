@@ -41,7 +41,7 @@ function TagInput({ label, tags, onAdd, onRemove, placeholder, color = 'primary'
       <label className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5 block">{label}</label>
 
       {/* Tag chip container */}
-      <div className="min-h-[3rem] rounded-xl border border-outline-variant/20 bg-surface-container/50 backdrop-blur-sm p-3 flex flex-wrap gap-2 focus-within:ring-2 focus-within:ring-primary/40 focus-within:border-primary/50 transition-all">
+      <div className="min-h-[3rem] rounded-xl border border-outline-variant/20 bg-surface-container backdrop-blur-sm p-3 flex flex-wrap gap-2 focus-within:ring-2 focus-within:ring-primary/40 focus-within:border-primary/50 transition-all">
         <AnimatePresence>
           {tags.map((tag, i) => (
             <motion.span key={tag + i}

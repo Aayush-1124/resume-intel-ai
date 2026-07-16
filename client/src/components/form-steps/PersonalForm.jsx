@@ -20,7 +20,7 @@ function Field({ label, id, type = 'text', value, onChange, onBlur, placeholder,
         placeholder={placeholder}
         required={required} aria-required={required}
         aria-describedby={error ? `${id}-err` : undefined}
-        className={`w-full rounded-xl border border-outline-variant/20 bg-surface-container/50 backdrop-blur-sm px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-all placeholder:text-on-surface-variant/40 ${error ? 'border-error/50 focus:ring-error/40' : ''}`}
+        className={`w-full rounded-xl border border-outline-variant/20 bg-surface-container backdrop-blur-sm px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-all placeholder:text-on-surface-variant/40 ${error ? 'border-error/50 focus:ring-error/40' : ''}`}
       />
       <AnimatePresence>
         {error && (
@@ -135,7 +135,7 @@ export default function PersonalForm({ data, onChange, onNext }) {
             onBlur={blur('summary')}
             maxLength={1000}
             placeholder="A concise 2-3 sentence pitch of your career, key skills, and unique value proposition..."
-            className={`w-full rounded-xl border border-outline-variant/20 bg-surface-container/50 backdrop-blur-sm px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-all placeholder:text-on-surface-variant/40 resize-none ${errors.summary ? 'border-error/50 focus:ring-error/40' : ''}`}
+            className={`w-full rounded-xl border border-outline-variant/20 bg-surface-container backdrop-blur-sm px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-all placeholder:text-on-surface-variant/40 resize-none ${errors.summary ? 'border-error/50 focus:ring-error/40' : ''}`}
             aria-describedby={errors.summary ? 'summary-err' : undefined}
           />
           <AnimatePresence>

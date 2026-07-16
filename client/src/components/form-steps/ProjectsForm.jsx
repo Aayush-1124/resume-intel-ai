@@ -19,7 +19,7 @@ function FieldErr({ msg }) {
 }
 
 const inputCls = (hasErr) =>
-  `w-full rounded-xl border border-outline-variant/20 bg-surface-container/50 backdrop-blur-sm px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-all placeholder:text-on-surface-variant/40 ${hasErr ? 'border-error/50 focus:ring-error/40' : ''}`;
+  `w-full rounded-xl border border-outline-variant/20 bg-surface-container backdrop-blur-sm px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-all placeholder:text-on-surface-variant/40 ${hasErr ? 'border-error/50 focus:ring-error/40' : ''}`;
 
 const labelCls = 'text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5 block';
 
