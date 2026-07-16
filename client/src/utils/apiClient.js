@@ -1,7 +1,7 @@
 /**
  * Global API Client & Interceptor
  */
-export const API_BASE_URL = '/api';
+export const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 /**
  * Dispatch a custom event to show a toast notification globally
