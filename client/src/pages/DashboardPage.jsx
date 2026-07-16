@@ -26,6 +26,7 @@ export default function DashboardPage({ resumeData, onUpdate, currentStep, onSte
   const [paperSize, setPaperSize] = useState('a4');
   const [showJobModal, setShowJobModal] = useState(false);
   const [mobileTab, setMobileTab] = useState('form');
+  const isPrinting = useRef(false);
 
   useEffect(() => {
     const el = previewContainerRef.current;
@@ -45,7 +46,13 @@ export default function DashboardPage({ resumeData, onUpdate, currentStep, onSte
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
     documentTitle: `${resumeData.personal?.fullName || 'Resume'} — ResumeIntel`,
-    onAfterPrint: () => setShowJobModal(true),
+    onBeforeGetContent: () => { isPrinting.current = true; },
+    onAfterPrint: () => {
+      if (isPrinting.current) {
+        isPrinting.current = false;
+        setShowJobModal(true);
+      }
+    },
     pageStyle: `
       @page { size: ${paperSize === 'letter' ? 'letter' : 'A4'}; margin: 0; }
       @media print {

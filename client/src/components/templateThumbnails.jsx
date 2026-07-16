@@ -98,18 +98,25 @@ export function ExecutiveThumb() {
 export function TechThumb() {
   return (
     <svg viewBox="0 0 28 36" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%' }}>
-      <rect width="28" height="36" fill="#0f172a"/>
-      <rect x="3" y="4" width="14" height="2" fill="#38bdf8" />
-      <rect x="3" y="7" width="18" height="0.5" fill="#94a3b8" />
-      <rect x="3" y="11" width="6" height="0.8" fill="#a78bfa" />
-      <rect x="3" y="13.5" width="2" height="1" fill="#38bdf8" />
-      <rect x="6" y="13.5" width="16" height="0.8" fill="#cbd5e1" />
-      <rect x="3" y="15.5" width="2" height="1" fill="#38bdf8" />
-      <rect x="6" y="15.5" width="18" height="0.8" fill="#cbd5e1" />
-      <rect x="3" y="20" width="6" height="0.8" fill="#a78bfa" />
-      <rect x="3" y="22.5" width="2" height="1" fill="#38bdf8" />
-      <rect x="6" y="22.5" width="14" height="0.8" fill="#cbd5e1" />
-      <rect x="3" y="26" width="20" height="3" rx="0.5" fill="#1e293b" />
+      <rect width="28" height="36" fill="white"/>
+      {/* Purple accent header bar */}
+      <rect x="0" y="0" width="28" height="5" fill="#6C47FF"/>
+      <rect x="2" y="1.5" width="10" height="1.5" rx="0.3" fill="white" opacity="0.9"/>
+      <rect x="2" y="3.5" width="7" height="0.8" rx="0.2" fill="white" opacity="0.5"/>
+      {/* Two col layout */}
+      {/* Left col — skills */}
+      <rect x="2" y="7" width="7" height="0.7" rx="0.2" fill="#6C47FF" opacity="0.6"/>
+      {[0,1,2,3].map(i => <rect key={i} x="2" y={9 + i*2.2} width={[6,5,7,4][i]} height="1" rx="3" fill="#F4F1FF"/>)}
+      <rect x="2" y="20" width="7" height="0.7" rx="0.2" fill="#6C47FF" opacity="0.6"/>
+      {[0,1].map(i => <rect key={i} x="2" y={22 + i*2.2} width={[5,6][i]} height="0.7" rx="0.2" fill="#ddd"/>)}
+      {/* Right col — experience */}
+      <rect x="12" y="7" width="6" height="0.7" rx="0.2" fill="#6C47FF" opacity="0.6"/>
+      <rect x="12" y="9" width="14" height="1" rx="0.2" fill="#222"/>
+      <rect x="12" y="10.5" width="8" height="0.7" rx="0.2" fill="#6C47FF"/>
+      {[0,1,2].map(i => <rect key={i} x="12" y={12.5 + i*2} width={[14,12,13][i]} height="0.7" rx="0.2" fill="#ddd"/>)}
+      <rect x="12" y="20" width="6" height="0.7" rx="0.2" fill="#6C47FF" opacity="0.6"/>
+      <rect x="12" y="22" width="14" height="0.8" rx="0.2" fill="#333"/>
+      {[0,1].map(i => <rect key={i} x="12" y={23.5 + i*2} width={[13,11][i]} height="0.7" rx="0.2" fill="#ddd"/>)}
     </svg>
   );
 }

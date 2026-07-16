@@ -8,18 +8,19 @@ const ClassicTemplate = memo(function ClassicTemplate({ data }) {
 
   return (
     <div style={{
-      fontFamily: "'Times New Roman', Times, serif",
+      fontFamily: "Arial, Calibri, 'Helvetica Neue', sans-serif",
       color: '#000',
-      padding: '48px 56px',
+      padding: '28px 36px',
       background: '#fff',
-      lineHeight: 1.5,
+      lineHeight: 1.35,
+      fontSize: '11px',
     }}>
       {/* Header */}
       <div style={{ textAlign: 'center', marginBottom: '16px' , pageBreakInside: 'avoid' }}>
-        <h1 style={{ fontSize: '32px', fontWeight: 900, textTransform: 'uppercase', margin: '0 0 6px 0', letterSpacing: '1px' }}>
+        <h1 style={{ fontSize: '20px', fontWeight: 900, textTransform: 'uppercase', margin: '0 0 4px 0', letterSpacing: '1px' }}>
           {personal.fullName || 'Your Name'}
         </h1>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0 8px', fontSize: '12px', color: '#111' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '0 6px', fontSize: '10px', color: '#111' }}>
           {personal.location && <span>{personal.location}</span>}
           {personal.phone && <><span>·</span><span>{personal.phone}</span></>}
           {personal.email && <><span>·</span><a href={`mailto:${personal.email}`} style={{color: '#000', textDecoration: 'none'}}>{personal.email}</a></>}
@@ -31,14 +32,14 @@ const ClassicTemplate = memo(function ClassicTemplate({ data }) {
       {/* Summary */}
       {personal.summary && (
         <Section title="SUMMARY">
-          <p style={{ fontSize: '12.5px', margin: 0, textAlign: 'justify' }}>{personal.summary}</p>
+          <p style={{ fontSize: '10.5px', margin: 0, textAlign: 'justify' }}>{personal.summary}</p>
         </Section>
       )}
 
       {/* Skills */}
       {(skills.technical?.length > 0 || skills.languages?.length > 0 || skills.soft?.length > 0) && (
         <Section title="TECHNICAL SKILLS">
-          <div style={{ fontSize: '12.5px' }}>
+          <div style={{ fontSize: '10.5px' }}>
             {skills.technical?.map((skill, i) => {
               if (skill.includes(':')) {
                 const [label, ...rest] = skill.split(':');
@@ -60,20 +61,20 @@ const ClassicTemplate = memo(function ClassicTemplate({ data }) {
       {experience.some((e) => e.title) && (
         <Section title="EXPERIENCE">
           {experience.filter((e) => e.title).map((exp, i) => (
-            <div key={i} style={{ marginBottom: '12px' , pageBreakInside: 'avoid' }}>
+            <div key={i} style={{ marginBottom: '8px', breakInside: 'avoid', pageBreakInside: 'avoid' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                 <div style={{ fontSize: '12.5px' }}>
                   <strong>{exp.title}</strong>
                   {exp.company && <span> · {exp.company}</span>}
                   {exp.location && <span>, {exp.location}</span>}
                 </div>
-                <span style={{ fontSize: '12.5px', fontStyle: 'italic', color: '#333' }}>
+                <span style={{ fontSize: '10.5px', fontStyle: 'italic', color: '#333' }}>
                   {exp.startDate}{exp.startDate && exp.endDate ? ' – ' : ''}{exp.endDate}
                 </span>
               </div>
               <ul style={{ margin: '4px 0 0', paddingLeft: '20px', listStyleType: 'disc' }}>
                 {exp.bullets?.filter(Boolean).map((b, j) => (
-                  <li key={j} style={{ fontSize: '12.5px', marginBottom: '3px', textAlign: 'justify' }}>{b}</li>
+                  <li key={j} style={{ fontSize: '10.5px', marginBottom: '2px', textAlign: 'justify' }}>{b}</li>
                 ))}
               </ul>
             </div>
@@ -86,7 +87,7 @@ const ClassicTemplate = memo(function ClassicTemplate({ data }) {
       {projects.some((p) => p.title) && (
         <Section title="PROJECTS">
           {projects.filter((p) => p.title).map((proj, i) => (
-            <div key={i} style={{ marginBottom: '12px', pageBreakInside: 'avoid' }}>
+            <div key={i} style={{ marginBottom: '8px', breakInside: 'avoid', pageBreakInside: 'avoid' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                 <div style={{ fontSize: '12.5px' }}>
                   <strong>{proj.title}</strong>
@@ -96,7 +97,7 @@ const ClassicTemplate = memo(function ClassicTemplate({ data }) {
               </div>
               <ul style={{ margin: '4px 0 0', paddingLeft: '20px', listStyleType: 'disc' }}>
                 {proj.bullets?.filter(Boolean).map((b, j) => (
-                  <li key={j} style={{ fontSize: '12.5px', marginBottom: '3px', textAlign: 'justify' }}>{b}</li>
+                  <li key={j} style={{ fontSize: '10.5px', marginBottom: '2px', textAlign: 'justify' }}>{b}</li>
                 ))}
               </ul>
             </div>
@@ -104,77 +105,6 @@ const ClassicTemplate = memo(function ClassicTemplate({ data }) {
         </Section>
       )}
 
-      {/* Projects */}
-      {projects.filter(p => p.title).length > 0 && (
-        <div style={{ marginBottom: '32px' }}>
-          <h2 style={{ fontSize: '15px', fontWeight: 'bold', textTransform: 'uppercase', borderBottom: '1px solid #cbd5e1', paddingBottom: '6px', marginBottom: '20px', color: '#0f172a' }}>
-            Projects
-          </h2>
-          {projects.filter(p => p.title).map((proj, i) => (
-            <div key={i} style={{ marginBottom: '20px', pageBreakInside: 'avoid' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                <strong style={{ fontSize: '16px', color: '#0f172a' }}>{proj.title}</strong>
-                {proj.link && <span style={{ fontSize: '13px', color: '#64748b' }}>{proj.link.replace(/^https?:\/\//, '')}</span>}
-              </div>
-              {proj.role && <div style={{ fontSize: '14px', color: '#334155', fontStyle: 'italic', marginBottom: '8px' , pageBreakInside: 'avoid' }}>{proj.role}</div>}
-              <ul style={{ margin: 0, paddingLeft: '20px', listStyleType: 'disc' }}>
-                {proj.bullets?.filter(Boolean).map((b, j) => (
-                  <li key={j} style={{ fontSize: '13.5px', marginBottom: '6px', color: '#334155', lineHeight: 1.5 }}>{b}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Projects */}
-      {projects.filter(p => p.title).length > 0 && (
-        <div style={{ marginBottom: '28px' }}>
-          <div style={{ fontFamily: "'Fira Code', 'Courier New', monospace", fontSize: '12px', color: '#a78bfa', marginBottom: '16px' , pageBreakInside: 'avoid' }}>&lt;Projects /&gt;</div>
-          {projects.filter(p => p.title).map((proj, i) => (
-            <div key={i} style={{ marginBottom: '24px', position: 'relative', paddingLeft: '16px', pageBreakInside: 'avoid' }}>
-              <div style={{ position: 'absolute', left: 0, top: '6px', width: '2px', height: '100%', background: '#334155' }} />
-              <div style={{ position: 'absolute', left: '-3px', top: '6px', width: '8px', height: '8px', borderRadius: '50%', background: '#38bdf8' }} />
-              
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                <strong style={{ fontSize: '15px', color: '#f8fafc' }}>{proj.title} {proj.role && <span style={{ color: '#94a3b8', fontWeight: 'normal' }}>- {proj.role}</span>}</strong>
-                {proj.link && <span style={{ fontFamily: "'Fira Code', 'Courier New', monospace", fontSize: '11px', color: '#64748b' }}>[{proj.link.replace(/^https?:\/\//, '')}]</span>}
-              </div>
-              
-              <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {proj.bullets?.filter(Boolean).map((b, j) => (
-                  <div key={j} style={{ display: 'flex', gap: '10px' }}>
-                    <span style={{ color: '#a78bfa', fontSize: '12px', fontFamily: "'Fira Code', 'Courier New', monospace" }}>&gt;</span>
-                    <span style={{ fontSize: '12.5px', color: '#cbd5e1', lineHeight: 1.5 }}>{b}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Projects */}
-      {projects.filter(p => p.title).length > 0 && (
-        <div style={{ marginBottom: '12px' , pageBreakInside: 'avoid' }}>
-          <div style={{ fontWeight: 'bold', fontSize: '12px', textTransform: 'uppercase', borderBottom: '1px solid #111', paddingBottom: '2px', marginBottom: '8px' , pageBreakInside: 'avoid' }}>Projects</div>
-          {projects.filter(p => p.title).map((proj, i) => (
-            <div key={i} style={{ marginBottom: '8px', pageBreakInside: 'avoid' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px' }}>
-                <div>
-                  <strong>{proj.title}</strong>{proj.role && <em>, {proj.role}</em>}
-                </div>
-                {proj.link && <div style={{ fontSize: '11px', fontWeight: 'bold', color: '#555' }}>{proj.link.replace(/^https?:\/\//, '')}</div>}
-              </div>
-              <ul style={{ margin: '4px 0 0', paddingLeft: '18px', listStyleType: 'disc', fontSize: '11px' }}>
-                {proj.bullets?.filter(Boolean).map((b, j) => (
-                  <li key={j} style={{ marginBottom: '2px', textAlign: 'justify' }}>{b}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      )}
       {/* Education */}
       {education.some((e) => e.institution) && (
         <Section title="EDUCATION">
@@ -208,10 +138,10 @@ const ClassicTemplate = memo(function ClassicTemplate({ data }) {
 
 function Section({ title, children }) {
   return (
-    <div style={{ marginBottom: '14px' }}>
+    <div style={{ marginBottom: '10px' }}>
       <h2 style={{
-        fontSize: '14px', fontWeight: 900, textTransform: 'uppercase',
-        borderBottom: '1px solid #000', paddingBottom: '3px', margin: '0 0 8px 0',
+        fontSize: '11px', fontWeight: 900, textTransform: 'uppercase',
+        borderBottom: '1px solid #000', paddingBottom: '2px', margin: '0 0 5px 0',
       }}>{title}</h2>
       {children}
     </div>
@@ -225,71 +155,70 @@ const ModernTemplate = memo(function ModernTemplate({ data }) {
   const { personal = {}, experience = [], projects = [], education = [], skills = {} } = data;
 
   return (
-    <div style={{ display: 'flex', fontFamily: "'Georgia', 'Times New Roman', serif", background: '#fff', minHeight: '100%' }}>
+    <div style={{ display: 'table', width: '100%', height: '100%', fontFamily: "Arial, Calibri, 'Helvetica Neue', sans-serif", background: '#fff' }}>
 
       {/* Sidebar */}
-      <div style={{ width: '32%', background: '#1d00a5', color: '#fff', padding: '44px 26px', display: 'flex', flexDirection: 'column', gap: '28px' }}>
+      <div style={{ display: 'table-cell', width: '30%', background: '#1d00a5', color: '#fff', padding: '28px 18px', verticalAlign: 'top', height: '100%' }}>
         <div>
-          {(personal.fullName || 'Your Name').split(' ').map((n, i) => (
-            <div key={i} style={{ fontSize: i === 0 ? '26px' : '24px', fontWeight: 900, lineHeight: 1.2, textTransform: 'uppercase', letterSpacing: '-0.5px' }}>{n}</div>
-          ))}
+          {(personal.fullName || 'Your Name').split(' ').map((n, i) => <div key={i} style={{ fontSize: i === 0 ? '18px' : '16px', fontWeight: 900, lineHeight: 1.15, textTransform: 'uppercase', letterSpacing: '-0.5px' }}>{n}</div>
+          )}
           <div style={{ width: '32px', height: '3px', background: '#c3c0ff', margin: '14px 0' }} />
           {[personal.email, personal.phone, personal.location, personal.linkedin].filter(Boolean).map((v, i) => (
-            <p key={i} style={{ fontSize: '11px', opacity: 0.88, margin: '5px 0', wordBreak: 'break-all', lineHeight: 1.4 }}>{v}</p>
+            <p key={i} style={{ fontSize: '9.5px', opacity: 0.88, margin: '3px 0', wordBreak: 'break-all', lineHeight: 1.35 }}>{v}</p>
           ))}
         </div>
 
         {/* Skills sidebar */}
         {skills.technical?.length > 0 && (
-          <div>
-            <p style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.6, marginBottom: '12px' }}>Skills</p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '7px' }}>
+          <div style={{ marginTop: '28px' }}>
+            <p style={{ fontSize: '8.5px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.6, marginBottom: '8px' }}>Skills</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
               {[...(skills.technical || []), ...(skills.languages || [])].slice(0, 16).map((s) => (
-                <span key={s} style={{ background: 'rgba(255,255,255,0.15)', borderRadius: '4px', padding: '4px 9px', fontSize: '10px', fontWeight: 500, lineHeight: 1.4 }}>{s}</span>
+                <span key={s} style={{ background: 'rgba(255,255,255,0.15)', borderRadius: '3px', padding: '3px 6px', fontSize: '8.5px', fontWeight: 500, lineHeight: 1.3 }}>{s}</span>
               ))}
             </div>
           </div>
         )}
 
         {skills.soft?.length > 0 && (
-          <div>
-            <p style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.6, marginBottom: '10px' }}>Soft Skills</p>
+          <div style={{ marginTop: '28px' }}>
+            <p style={{ fontSize: '8.5px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.6, marginBottom: '8px' }}>Soft Skills</p>
             {skills.soft.slice(0, 7).map((s) => (
               <div key={s} style={{ display: 'flex', alignItems: 'center', gap: '9px', marginBottom: '8px' }}>
                 <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#c3c0ff', flexShrink: 0 }} />
-                <span style={{ fontSize: '11px', opacity: 0.9, lineHeight: 1.4 }}>{s}</span>
+                <span style={{ fontSize: '9.5px', opacity: 0.9, lineHeight: 1.3 }}>{s}</span>
               </div>
             ))}
           </div>
         )}
 
         {education.filter((e) => e.institution).length > 0 && (
-          <div>
-            <p style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.6, marginBottom: '12px' }}>Education</p>
+          <div style={{ marginTop: '28px' }}>
+            <p style={{ fontSize: '8.5px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.6, marginBottom: '8px' }}>Education</p>
             {education.filter((e) => e.institution).map((edu, i) => (
               <div key={i} style={{ marginBottom: '16px', pageBreakInside: 'avoid' }}>
-                <p style={{ fontSize: '12px', fontWeight: 700, margin: 0, lineHeight: 1.35 }}>{edu.degree}{edu.field ? ` in ${edu.field}` : ''}</p>
-                <p style={{ fontSize: '11px', opacity: 0.8, margin: '3px 0' }}>{edu.institution}</p>
-                <p style={{ fontSize: '10px', opacity: 0.6, margin: 0 }}>{edu.graduationYear}</p>
+                <p style={{ fontSize: '10px', fontWeight: 700, margin: 0, lineHeight: 1.3 }}>{edu.degree}{edu.field ? ` in ${edu.field}` : ''}</p>
+                <p style={{ fontSize: '9px', opacity: 0.8, margin: '2px 0' }}>{edu.institution}</p>
+                <p style={{ fontSize: '8.5px', opacity: 0.6, margin: 0 }}>{edu.graduationYear}</p>
               </div>
             ))}
           </div>
         )}
 
         {skills.certifications?.length > 0 && (
-          <div>
-            <p style={{ fontSize: '10px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.6, marginBottom: '10px' }}>Certifications</p>
-            {skills.certifications.map((c) => <p key={c} style={{ fontSize: '11px', opacity: 0.85, margin: '5px 0', lineHeight: 1.4 }}>• {c}</p>)}
+          <div style={{ marginTop: '28px' }}>
+            <p style={{ fontSize: '8.5px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '2px', opacity: 0.6, marginBottom: '8px' }}>Certifications</p>
+            {skills.certifications.map((c) => <p key={c} style={{ fontSize: '9px', opacity: 0.85, margin: '4px 0', lineHeight: 1.35 }}>• {c}</p>)}
           </div>
         )}
       </div>
 
       {/* Main content */}
-      <div style={{ flex: 1, padding: '40px 34px', display: 'flex', flexDirection: 'column', gap: '22px', overflow: 'hidden' }}>
+      <div style={{ display: 'table-cell', padding: '28px 24px', verticalAlign: 'top' }}>
         {personal.summary && (
           <div>
             <MLabel>Profile</MLabel>
-            <p style={{ fontSize: '13px', color: '#333', lineHeight: 1.75, margin: 0 }}>{personal.summary}</p>
+            <p style={{ fontSize: '10.5px', color: '#333', lineHeight: 1.55, margin: 0 }}>{personal.summary}</p>
           </div>
         )}
 
@@ -299,10 +228,10 @@ const ModernTemplate = memo(function ModernTemplate({ data }) {
             {experience.filter((e) => e.title).map((exp, i) => (
               <div key={i} style={{ marginBottom: '20px', pageBreakInside: 'avoid' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                  <strong style={{ fontSize: '15px', color: '#191c1e' }}>{exp.title}</strong>
-                  <span style={{ fontSize: '11px', fontWeight: 700, color: '#888', textTransform: 'uppercase' }}>{exp.startDate}{exp.startDate && exp.endDate ? ' — ' : ''}{exp.endDate}</span>
+                  <strong style={{ fontSize: '12px', color: '#191c1e' }}>{exp.title}</strong>
+                  <span style={{ fontSize: '9.5px', fontWeight: 700, color: '#888', textTransform: 'uppercase' }}>{exp.startDate}{exp.startDate && exp.endDate ? ' — ' : ''}{exp.endDate}</span>
                 </div>
-                <p style={{ fontSize: '12.5px', fontWeight: 700, color: '#1d00a5', textTransform: 'uppercase', margin: '5px 0 8px' }}>
+                <p style={{ fontSize: '10px', fontWeight: 700, color: '#1d00a5', textTransform: 'uppercase', margin: '3px 0 6px' }}>
                   {exp.company}{exp.company && exp.location ? ' • ' : ''}{exp.location}
                 </p>
                 {exp.bullets?.filter(Boolean).map((b, j) => (
@@ -322,10 +251,10 @@ const ModernTemplate = memo(function ModernTemplate({ data }) {
             {projects.filter((p) => p.title).map((proj, i) => (
               <div key={i} style={{ marginBottom: '20px', pageBreakInside: 'avoid' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                  <strong style={{ fontSize: '15px', color: '#191c1e' }}>{proj.title}</strong>
-                  {proj.link && <span style={{ fontSize: '11px', color: '#888' }}>{proj.link.replace(/^https?:\/\//, '')}</span>}
+                  <strong style={{ fontSize: '12px', color: '#191c1e' }}>{proj.title}</strong>
+                  {proj.link && <span style={{ fontSize: '9.5px', color: '#888' }}>{proj.link.replace(/^https?:\/\//, '')}</span>}
                 </div>
-                {proj.role && <p style={{ fontSize: '12.5px', fontWeight: 700, color: '#1d00a5', textTransform: 'uppercase', margin: '5px 0 8px' }}>{proj.role}</p>}
+                {proj.role && <p style={{ fontSize: '10px', fontWeight: 700, color: '#1d00a5', textTransform: 'uppercase', margin: '3px 0 6px' }}>{proj.role}</p>}
                 {proj.bullets?.filter(Boolean).map((b, j) => (
                   <div key={j} style={{ display: 'flex', gap: '9px', marginBottom: '5px' }}>
                     <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#1d00a5', flexShrink: 0, marginTop: '7px' }} />
@@ -341,7 +270,7 @@ const ModernTemplate = memo(function ModernTemplate({ data }) {
   );
 });
 function MLabel({ children }) {
-  return <p style={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2.5px', color: '#aaa', marginBottom: '10px' }}>{children}</p>;
+  return <p style={{ fontSize: '8.5px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '2.5px', color: '#aaa', marginBottom: '8px' }}>{children}</p>;
 }
 
 /* ═══════════════════════════════════════════════════
@@ -358,13 +287,13 @@ const MinimalTemplate = memo(function MinimalTemplate({ data }) {
   );
 
   return (
-    <div style={{ fontFamily: "'Arial', 'Helvetica', sans-serif", color: '#191c1e', padding: '32px 40px', background: '#fff', fontSize: '12px', lineHeight: 1.5 }}>
+    <div style={{ fontFamily: "Arial, Calibri, 'Helvetica Neue', sans-serif", color: '#191c1e', padding: '24px 32px', background: '#fff', fontSize: '10.5px', lineHeight: 1.35 }}>
       {/* Header */}
       <div style={{ borderBottom: '2px solid #191c1e', paddingBottom: '16px', marginBottom: '20px' }}>
-        <h1 style={{ fontSize: '32px', fontWeight: 900, letterSpacing: '-1px', textTransform: 'uppercase', lineHeight: 1, margin: '0 0 8px 0' }}>
+        <h1 style={{ fontSize: '22px', fontWeight: 900, letterSpacing: '-1px', textTransform: 'uppercase', lineHeight: 1, margin: '0 0 5px 0' }}>
           {personal.fullName || 'Your Name'}
         </h1>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0 16px', fontSize: '11px', color: '#555' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0 12px', fontSize: '9.5px', color: '#555' }}>
           {[personal.email, personal.phone, personal.location, personal.linkedin, personal.website].filter(Boolean).map((v, i) => (
             <span key={i}>{v}</span>
           ))}
@@ -374,7 +303,7 @@ const MinimalTemplate = memo(function MinimalTemplate({ data }) {
       {personal.summary && (
         <div style={{ marginBottom: '18px' }}>
           <SectionLabel>Profile</SectionLabel>
-          <p style={{ fontSize: '12px', color: '#333', lineHeight: 1.65, margin: 0 }}>{personal.summary}</p>
+          <p style={{ fontSize: '10.5px', color: '#333', lineHeight: 1.55, margin: 0 }}>{personal.summary}</p>
         </div>
       )}
 
@@ -384,10 +313,10 @@ const MinimalTemplate = memo(function MinimalTemplate({ data }) {
           {experience.filter((e) => e.title).map((exp, i) => (
             <div key={i} style={{ marginBottom: '14px', pageBreakInside: 'avoid' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                <strong style={{ fontSize: '13px', color: '#191c1e' }}>{exp.title}</strong>
-                <span style={{ fontSize: '10px', color: '#999' }}>{exp.startDate}{exp.startDate && exp.endDate ? ' – ' : ''}{exp.endDate}</span>
+                <strong style={{ fontSize: '11px', color: '#191c1e' }}>{exp.title}</strong>
+                <span style={{ fontSize: '9px', color: '#999' }}>{exp.startDate}{exp.startDate && exp.endDate ? ' – ' : ''}{exp.endDate}</span>
               </div>
-              <p style={{ fontSize: '11.5px', fontWeight: 700, color: '#3525cd', margin: '2px 0 5px' }}>
+              <p style={{ fontSize: '9.5px', fontWeight: 700, color: '#3525cd', margin: '2px 0 4px' }}>
                 {exp.company}{exp.company && exp.location ? ' · ' : ''}{exp.location}
               </p>
               {exp.bullets?.filter(Boolean).map((b, j) => (
@@ -407,10 +336,10 @@ const MinimalTemplate = memo(function MinimalTemplate({ data }) {
           {projects.filter((p) => p.title).map((proj, i) => (
             <div key={i} style={{ marginBottom: '14px', pageBreakInside: 'avoid' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                <strong style={{ fontSize: '13px', color: '#191c1e' }}>{proj.title}</strong>
+                <strong style={{ fontSize: '11px', color: '#191c1e' }}>{proj.title}</strong>
                 {proj.link && <span style={{ fontSize: '10px', color: '#aaa' }}>{proj.link.replace(/^https?:\/\//, '')}</span>}
               </div>
-              {proj.role && <p style={{ fontSize: '11.5px', fontWeight: 700, color: '#3525cd', margin: '2px 0 5px' }}>{proj.role}</p>}
+              {proj.role && <p style={{ fontSize: '9.5px', fontWeight: 700, color: '#3525cd', margin: '2px 0 4px' }}>{proj.role}</p>}
               {proj.bullets?.filter(Boolean).map((b, j) => (
                 <div key={j} style={{ display: 'flex', gap: '8px', marginBottom: '3px' }}>
                   <span style={{ color: '#3525cd', flexShrink: 0 }}>–</span>
@@ -459,13 +388,13 @@ const ExecutiveTemplate = memo(function ExecutiveTemplate({ data }) {
   const { personal = {}, experience = [], projects = [], education = [], skills = {} } = data;
 
   return (
-    <div style={{ fontFamily: "'Georgia', serif", color: '#0f172a', padding: '36px 48px', background: '#fff', lineHeight: 1.5 }}>
+    <div style={{ fontFamily: "Arial, Calibri, 'Helvetica Neue', sans-serif", color: '#0f172a', padding: '28px 36px', background: '#fff', lineHeight: 1.35 }}>
       {/* Header */}
       <div style={{ borderBottom: '2px solid #0f172a', paddingBottom: '16px', marginBottom: '20px' }}>
-        <h1 style={{ fontSize: '34px', fontWeight: 'bold', margin: '0 0 8px 0', textTransform: 'uppercase', letterSpacing: '1px' }}>
+        <h1 style={{ fontSize: '22px', fontWeight: 'bold', margin: '0 0 6px 0', textTransform: 'uppercase', letterSpacing: '1px' }}>
           {personal.fullName || 'Your Name'}
         </h1>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', fontSize: '13px', color: '#475569' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', fontSize: '10.5px', color: '#475569' }}>
           {personal.email && <span>{personal.email}</span>}
           {personal.phone && <span>• {personal.phone}</span>}
           {personal.location && <span>• {personal.location}</span>}
@@ -475,7 +404,7 @@ const ExecutiveTemplate = memo(function ExecutiveTemplate({ data }) {
 
       {personal.summary && (
         <div style={{ marginBottom: '20px' }}>
-          <p style={{ fontSize: '13.5px', margin: 0, fontStyle: 'italic', color: '#334155' }}>{personal.summary}</p>
+          <p style={{ fontSize: '10.5px', margin: 0, fontStyle: 'italic', color: '#334155' }}>{personal.summary}</p>
         </div>
       )}
 
@@ -502,17 +431,40 @@ const ExecutiveTemplate = memo(function ExecutiveTemplate({ data }) {
             Professional Experience
           </h2>
           {experience.filter(e => e.title).map((exp, i) => (
-            <div key={i} style={{ marginBottom: '16px' , pageBreakInside: 'avoid' }}>
+            <div key={i} style={{ marginBottom: '10px', breakInside: 'avoid', pageBreakInside: 'avoid' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                <strong style={{ fontSize: '16px', color: '#0f172a' }}>{exp.title}</strong>
-                <span style={{ fontSize: '13px', color: '#64748b', fontWeight: 'bold' }}>{exp.startDate}{exp.startDate && exp.endDate ? ' – ' : ''}{exp.endDate}</span>
+                <strong style={{ fontSize: '13px', color: '#0f172a' }}>{exp.title}</strong>
+                <span style={{ fontSize: '10px', color: '#64748b', fontWeight: 'bold' }}>{exp.startDate}{exp.startDate && exp.endDate ? ' – ' : ''}{exp.endDate}</span>
               </div>
-              <div style={{ fontSize: '14px', color: '#334155', fontStyle: 'italic', marginBottom: '8px' , pageBreakInside: 'avoid' }}>
+              <div style={{ fontSize: '11px', color: '#334155', fontStyle: 'italic', marginBottom: '6px', breakInside: 'avoid', pageBreakInside: 'avoid' }}>
                 {exp.company}{exp.company && exp.location ? ' | ' : ''}{exp.location}
               </div>
               <ul style={{ margin: 0, paddingLeft: '20px', listStyleType: 'disc' }}>
                 {exp.bullets?.filter(Boolean).map((b, j) => (
-                  <li key={j} style={{ fontSize: '13.5px', marginBottom: '6px', color: '#334155', lineHeight: 1.5 }}>{b}</li>
+                  <li key={j} style={{ fontSize: '10.5px', marginBottom: '4px', color: '#334155', lineHeight: 1.4 }}>{b}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Projects */}
+      {projects.filter(e => e.title).length > 0 && (
+        <div style={{ marginBottom: '16px' }}>
+          <h2 style={{ fontSize: '11.5px', fontWeight: 'bold', textTransform: 'uppercase', borderBottom: '1px solid #cbd5e1', paddingBottom: '3px', marginBottom: '10px', color: '#0f172a' }}>
+            Projects
+          </h2>
+          {projects.filter(e => e.title).map((proj, i) => (
+            <div key={i} style={{ marginBottom: '8px', breakInside: 'avoid', pageBreakInside: 'avoid' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                <strong style={{ fontSize: '12px', color: '#0f172a' }}>{proj.title}</strong>
+                {proj.link && <span style={{ fontSize: '9.5px', color: '#64748b' }}>{proj.link.replace(/^https?:\/\//, '')}</span>}
+              </div>
+              {proj.role && <div style={{ fontSize: '10px', color: '#334155', fontStyle: 'italic', marginBottom: '4px' }}>{proj.role}</div>}
+              <ul style={{ margin: 0, paddingLeft: '18px', listStyleType: 'disc' }}>
+                {proj.bullets?.filter(Boolean).map((b, j) => (
+                  <li key={j} style={{ fontSize: '10.5px', marginBottom: '3px', color: '#334155', lineHeight: 1.4 }}>{b}</li>
                 ))}
               </ul>
             </div>
@@ -560,14 +512,14 @@ const TechTemplate = memo(function TechTemplate({ data }) {
   );
 
   return (
-    <div style={{ fontFamily: "'Inter', 'Helvetica Neue', sans-serif", color: '#1a1a2e', background: '#ffffff', padding: '36px 44px', fontSize: '12px', lineHeight: 1.5 }}>
+    <div style={{ fontFamily: "Arial, Calibri, 'Helvetica Neue', sans-serif", color: '#1a1a2e', background: '#ffffff', padding: '24px 32px', fontSize: '10.5px', lineHeight: 1.35 }}>
 
       {/* Header */}
       <div style={{ marginBottom: '24px', paddingBottom: '20px', borderBottom: `3px solid ${accent}` }}>
-        <h1 style={{ fontSize: '34px', fontWeight: 900, margin: '0 0 4px 0', letterSpacing: '-0.5px', color: '#1a1a2e' }}>
+        <h1 style={{ fontSize: '22px', fontWeight: 900, margin: '0 0 3px 0', letterSpacing: '-0.5px', color: '#1a1a2e' }}>
           {personal.fullName || 'Your Name'}
         </h1>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px 16px', fontSize: '11px', color: '#666' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3px 12px', fontSize: '9.5px', color: '#666' }}>
           {personal.email && <span>{personal.email}</span>}
           {personal.phone && <span>{personal.phone}</span>}
           {personal.location && <span>{personal.location}</span>}
@@ -576,18 +528,18 @@ const TechTemplate = memo(function TechTemplate({ data }) {
         </div>
       </div>
 
-      {/* Two-column layout */}
-      <div style={{ display: 'flex', gap: '28px' }}>
+      {/* Two-column layout — table-based for print compatibility */}
+      <div style={{ display: 'table', width: '100%', borderSpacing: '28px 0', tableLayout: 'fixed' }}>
 
         {/* Left column — Skills, Education */}
-        <div style={{ width: '170px', flexShrink: 0 }}>
+        <div style={{ display: 'table-cell', width: '170px', verticalAlign: 'top' }}>
 
           {(skills.technical?.length > 0 || skills.languages?.length > 0) && (
             <div style={{ marginBottom: '20px' }}>
               <SectionHead>Skills</SectionHead>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
                 {[...(skills.technical || []), ...(skills.languages || [])].map((s, i) => (
-                  <span key={i} style={{ fontSize: '10px', background: light, color: accent, fontWeight: 600, padding: '3px 8px', borderRadius: '20px' }}>{s}</span>
+                  <span key={i} style={{ fontSize: '8.5px', background: light, color: accent, fontWeight: 600, padding: '2px 6px', borderRadius: '20px' }}>{s}</span>
                 ))}
               </div>
             </div>
@@ -597,7 +549,7 @@ const TechTemplate = memo(function TechTemplate({ data }) {
             <div style={{ marginBottom: '20px' }}>
               <SectionHead>Soft Skills</SectionHead>
               {skills.soft.map((s, i) => (
-                <div key={i} style={{ fontSize: '11px', color: '#444', marginBottom: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <div key={i} style={{ fontSize: '9.5px', color: '#444', marginBottom: '3px', display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: accent, flexShrink: 0 }} />
                   {s}
                 </div>
@@ -610,10 +562,10 @@ const TechTemplate = memo(function TechTemplate({ data }) {
               <SectionHead>Education</SectionHead>
               {education.filter(e => e.institution).map((edu, i) => (
                 <div key={i} style={{ marginBottom: '10px', pageBreakInside: 'avoid' }}>
-                  <div style={{ fontSize: '11.5px', fontWeight: 700, color: '#1a1a2e' }}>{edu.degree}</div>
-                  {edu.field && <div style={{ fontSize: '10.5px', color: '#555' }}>{edu.field}</div>}
-                  <div style={{ fontSize: '10.5px', color: '#777' }}>{edu.institution}</div>
-                  <div style={{ fontSize: '10px', color: accent, fontWeight: 600 }}>{edu.graduationYear}</div>
+                  <div style={{ fontSize: '10px', fontWeight: 700, color: '#1a1a2e' }}>{edu.degree}</div>
+                  {edu.field && <div style={{ fontSize: '9px', color: '#555' }}>{edu.field}</div>}
+                  <div style={{ fontSize: '9px', color: '#777' }}>{edu.institution}</div>
+                  <div style={{ fontSize: '8.5px', color: accent, fontWeight: 600 }}>{edu.graduationYear}</div>
                 </div>
               ))}
             </div>
@@ -623,19 +575,19 @@ const TechTemplate = memo(function TechTemplate({ data }) {
             <div>
               <SectionHead>Certifications</SectionHead>
               {skills.certifications.map((c, i) => (
-                <div key={i} style={{ fontSize: '10.5px', color: '#444', marginBottom: '5px', lineHeight: 1.4 }}>{c}</div>
+                <div key={i} style={{ fontSize: '9px', color: '#444', marginBottom: '4px', lineHeight: 1.35 }}>{c}</div>
               ))}
             </div>
           )}
         </div>
 
         {/* Right column — Summary, Experience, Projects */}
-        <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ display: 'table-cell', verticalAlign: 'top' }}>
 
           {personal.summary && (
             <div style={{ marginBottom: '20px' }}>
               <SectionHead>Profile</SectionHead>
-              <p style={{ fontSize: '12px', color: '#444', lineHeight: 1.65, margin: 0 }}>{personal.summary}</p>
+              <p style={{ fontSize: '10px', color: '#444', lineHeight: 1.55, margin: 0 }}>{personal.summary}</p>
             </div>
           )}
 
@@ -645,10 +597,10 @@ const TechTemplate = memo(function TechTemplate({ data }) {
               {experience.filter(e => e.title).map((exp, i) => (
                 <div key={i} style={{ marginBottom: '14px', pageBreakInside: 'avoid' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                    <strong style={{ fontSize: '13px', color: '#1a1a2e' }}>{exp.title}</strong>
-                    <span style={{ fontSize: '10px', color: '#999' }}>{exp.startDate}{exp.startDate && exp.endDate ? ' – ' : ''}{exp.endDate}</span>
+                    <strong style={{ fontSize: '11px', color: '#1a1a2e' }}>{exp.title}</strong>
+                    <span style={{ fontSize: '8.5px', color: '#999' }}>{exp.startDate}{exp.startDate && exp.endDate ? ' – ' : ''}{exp.endDate}</span>
                   </div>
-                  <p style={{ fontSize: '11px', fontWeight: 700, color: accent, margin: '2px 0 6px' }}>
+                  <p style={{ fontSize: '9.5px', fontWeight: 700, color: accent, margin: '2px 0 4px' }}>
                     {exp.company}{exp.company && exp.location ? ' · ' : ''}{exp.location}
                   </p>
                   {exp.bullets?.filter(Boolean).map((b, j) => (
@@ -668,10 +620,10 @@ const TechTemplate = memo(function TechTemplate({ data }) {
               {projects.filter(p => p.title).map((proj, i) => (
                 <div key={i} style={{ marginBottom: '14px', pageBreakInside: 'avoid' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                    <strong style={{ fontSize: '13px', color: '#1a1a2e' }}>{proj.title}</strong>
-                    {proj.link && <span style={{ fontSize: '10px', color: accent }}>{proj.link.replace(/^https?:\/\//, '')}</span>}
+                    <strong style={{ fontSize: '11px', color: '#1a1a2e' }}>{proj.title}</strong>
+                    {proj.link && <span style={{ fontSize: '8.5px', color: accent }}>{proj.link.replace(/^https?:\/\//, '')}</span>}
                   </div>
-                  {proj.role && <p style={{ fontSize: '11px', fontWeight: 700, color: accent, margin: '2px 0 6px' }}>{proj.role}</p>}
+                  {proj.role && <p style={{ fontSize: '9.5px', fontWeight: 700, color: accent, margin: '2px 0 4px' }}>{proj.role}</p>}
                   {proj.bullets?.filter(Boolean).map((b, j) => (
                     <div key={j} style={{ display: 'flex', gap: '8px', marginBottom: '3px' }}>
                       <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: accent, flexShrink: 0, marginTop: '5px' }} />
@@ -751,6 +703,28 @@ const CompactTemplate = memo(function CompactTemplate({ data }) {
         </div>
       )}
 
+      {/* Projects */}
+      {projects.filter(e => e.title).length > 0 && (
+        <div style={{ marginBottom: '10px' }}>
+          <div style={{ fontWeight: 'bold', fontSize: '11px', textTransform: 'uppercase', borderBottom: '1px solid #111', paddingBottom: '2px', marginBottom: '5px' }}>Projects</div>
+          {projects.filter(e => e.title).map((proj, i) => (
+            <div key={i} style={{ marginBottom: '5px', pageBreakInside: 'avoid' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px' }}>
+                <div>
+                  <strong>{proj.title}</strong>{proj.role && <em>, {proj.role}</em>}
+                </div>
+                {proj.link && <div style={{ fontSize: '10px', fontWeight: 'bold', color: '#555' }}>{proj.link.replace(/^https?:\/\//, '')}</div>}
+              </div>
+              <ul style={{ margin: '3px 0 0', paddingLeft: '16px', listStyleType: 'disc', fontSize: '10.5px' }}>
+                {proj.bullets?.filter(Boolean).map((b, j) => (
+                  <li key={j} style={{ marginBottom: '1px', textAlign: 'justify' }}>{b}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+
       {/* Education */}
       {education.filter(e => e.institution).length > 0 && (
         <div>
@@ -792,7 +766,7 @@ const ResumePreview = memo(forwardRef(function ResumePreview({ resumeData, selec
       style={{
         width,
         minHeight,
-        background: tpl === 'modern' ? 'linear-gradient(to right, #1d00a5 0%, #1d00a5 32%, #ffffff 32%, #ffffff 100%)' : '#ffffff',
+        background: tpl === 'modern' ? 'linear-gradient(to right, #1d00a5 0%, #1d00a5 30%, #ffffff 30%, #ffffff 100%)' : '#ffffff',
         borderRadius: '4px',
         boxShadow: '0 20px 60px -10px rgba(0,0,0,0.25)',
         wordBreak: 'break-word',
