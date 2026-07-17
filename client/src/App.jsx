@@ -1,11 +1,13 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar.jsx';
-import LandingPage from './pages/LandingPage.jsx';
-import DashboardPage from './pages/DashboardPage.jsx';
-import JobsPage from './pages/JobsPage.jsx';
 import TemplateModal from './components/TemplateModal.jsx';
 import ToastContainer from './components/ToastContainer.jsx';
+import ErrorBoundary from './components/ErrorBoundary.jsx';
+
+const LandingPage = lazy(() => import('./pages/LandingPage.jsx'));
+const DashboardPage = lazy(() => import('./pages/DashboardPage.jsx'));
+const JobsPage = lazy(() => import('./pages/JobsPage.jsx'));
 import { useLocalStorage } from './hooks/useLocalStorage.js';
 import { useTheme } from './hooks/useTheme.js';
 import { defaultResume } from './utils/api.js';
@@ -99,7 +101,11 @@ export default function App() {
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            <LandingPage onNavigate={navigate} onResumeLoaded={handleResumeLoaded} />
+            <ErrorBoundary>
+              <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div></div>}>
+                <LandingPage onNavigate={navigate} onResumeLoaded={handleResumeLoaded} />
+              </Suspense>
+            </ErrorBoundary>
           </motion.div>
         )}
 
@@ -110,13 +116,17 @@ export default function App() {
             transition={{ duration: 0.25 }}
             className="pt-[72px]"
           >
-            <DashboardPage
-              resumeData={resumeData}
-              onUpdate={handleUpdate}
-              currentStep={currentStep}
-              onStepChange={setCurrentStep}
-              onNavigate={navigate}
-            />
+            <ErrorBoundary>
+              <Suspense fallback={<div className="min-h-screen pt-[72px] flex items-center justify-center"><div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div></div>}>
+                <DashboardPage
+                  resumeData={resumeData}
+                  onUpdate={handleUpdate}
+                  currentStep={currentStep}
+                  onStepChange={setCurrentStep}
+                  onNavigate={navigate}
+                />
+              </Suspense>
+            </ErrorBoundary>
           </motion.div>
         )}
 
@@ -127,7 +137,11 @@ export default function App() {
             transition={{ duration: 0.25 }}
             className="pt-[72px]"
           >
-            <JobsPage resumeData={resumeData} onNavigate={navigate} />
+            <ErrorBoundary>
+              <Suspense fallback={<div className="min-h-screen pt-[72px] flex items-center justify-center"><div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div></div>}>
+                <JobsPage resumeData={resumeData} onNavigate={navigate} />
+              </Suspense>
+            </ErrorBoundary>
           </motion.div>
         )}
       </AnimatePresence>

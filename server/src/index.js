@@ -5,30 +5,29 @@ import mongoose from 'mongoose';
 import resumeRoutes from './routes/resume.js';
 import aiRoutes from './routes/ai.js';
 import jobRoutes from './routes/jobs.js';
+import { errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
+// CORS
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000',
-  process.env.FRONTEND_URL
+  process.env.FRONTEND_URL,
 ].filter(Boolean);
 
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
-    const isAllowed = allowedOrigins.includes(origin) || 
-                      origin.endsWith('.vercel.app') || 
-                      origin.startsWith('http://localhost:');
-    if (isAllowed) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
+    const isAllowed =
+      allowedOrigins.includes(origin) ||
+      origin.endsWith('.vercel.app') ||
+      origin.startsWith('http://localhost:');
+    if (isAllowed) callback(null, true);
+    else callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
 }));
@@ -40,19 +39,15 @@ app.use('/api/resumes', resumeRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/jobs', jobRoutes);
 
-// Health check
-app.get('/api/health', (req, res) => {
+// Health check — used by external keep-alive pings (e.g. UptimeRobot / cron-job.org)
+app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// Error handler
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: err.message || 'Internal Server Error' });
-});
+// Centralised error handler — must be last (handles ApiError, Multer, Zod, Gemini 429, etc.)
+app.use(errorHandler);
 
-// MongoDB Connection
-// Connect to MongoDB
+// MongoDB connection
 mongoose
   .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/resume-intel')
   .then(() => {
@@ -63,7 +58,7 @@ mongoose
   })
   .catch((err) => {
     console.error('❌ MongoDB connection error:', err.message);
-    // Start server anyway for development without MongoDB
+    // Start without DB for local dev without Atlas
     app.listen(PORT, () => {
       console.log(`🚀 Server running on http://localhost:${PORT} (without DB)`);
     });

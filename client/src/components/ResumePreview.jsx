@@ -673,7 +673,7 @@ const CompactTemplate = memo(function CompactTemplate({ data }) {
       {(skills.technical?.length > 0 || skills.soft?.length > 0) && (
         <div style={{ marginBottom: '12px' , pageBreakInside: 'avoid' }}>
           <div style={{ fontWeight: 'bold', fontSize: '12px', textTransform: 'uppercase', borderBottom: '1px solid #111', paddingBottom: '2px', marginBottom: '6px' }}>Skills</div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'x: 8px, y: 2px', fontSize: '11px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2px 8px', fontSize: '11px' }}>
             {skills.technical?.length > 0 && <div><strong>Technical:</strong> {skills.technical.join(', ')}</div>}
             {skills.languages?.length > 0 && <div><strong>Languages:</strong> {skills.languages.join(', ')}</div>}
             {skills.soft?.length > 0 && <div><strong>Soft:</strong> {skills.soft.join(', ')}</div>}

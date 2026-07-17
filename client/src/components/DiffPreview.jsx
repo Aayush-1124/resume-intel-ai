@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X, Sparkles, FileText, ArrowRight, GitCompareArrows } from 'lucide-react';
+import { Check, X, Sparkles, FileText, GitCompareArrows } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 export default function DiffPreview({ original, tailored, onAccept, onRevert }) {

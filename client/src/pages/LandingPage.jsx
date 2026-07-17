@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Upload, Zap, Target, FileText, Cpu, ArrowRight, CheckCircle, AlertCircle, FileType } from 'lucide-react';
+import { Upload, Zap, Target, ArrowRight, CheckCircle, AlertCircle, FileType } from 'lucide-react';
 import { api } from '../utils/api.js';
 
 export default function LandingPage({ onNavigate, onResumeLoaded }) {

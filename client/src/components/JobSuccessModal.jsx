@@ -1,9 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, Briefcase, X, Download } from 'lucide-react';
+import { CheckCircle, Briefcase, X } from 'lucide-react';
 
 export default function JobSuccessModal({ isOpen, onClose, onFindJobs }) {
-  if (!isOpen) return null;
-
   return (
     <AnimatePresence>
       {isOpen && (

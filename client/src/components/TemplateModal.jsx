@@ -20,8 +20,6 @@ const TEMPLATES = BASE_TEMPLATES.map(t => ({
 }));
 
 export default function TemplateModal({ isOpen, onClose, selected, onSelect }) {
-  if (!isOpen) return null;
-
   return (
     <AnimatePresence>
       {isOpen && (

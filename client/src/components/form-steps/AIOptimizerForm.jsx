@@ -16,22 +16,26 @@ export default function AIOptimizerForm({ resumeData, onUpdate, onBack, onTailor
 
   const prevResumeData = useRef(resumeData);
 
-  /* ── Auto-Score on Resume Data Change ── */
+  /* ── Auto-Score on Resume Data Change (Debounced) ── */
   useEffect(() => {
-    // Check if resumeData changed in a meaningful way to trigger re-score
-    if (jd.trim() && JSON.stringify(prevResumeData.current) !== JSON.stringify(resumeData)) {
-      prevResumeData.current = resumeData;
-      
-      // Auto-trigger scoring silently (without blocking UI)
-      api.atsScore(resumeData, jd).then((result) => {
-        setAtsResult(result);
-        if (result.score !== resumeData.atsScore) {
-          onUpdate({ ...resumeData, atsScore: result.score });
-        }
-      }).catch(err => {
-        console.error("Auto-score failed:", err);
-      });
-    }
+    const timer = setTimeout(() => {
+      // Check if resumeData changed in a meaningful way to trigger re-score
+      if (jd.trim() && JSON.stringify(prevResumeData.current) !== JSON.stringify(resumeData)) {
+        prevResumeData.current = resumeData;
+        
+        // Auto-trigger scoring silently (without blocking UI)
+        api.atsScore(resumeData, jd).then((result) => {
+          setAtsResult(result);
+          if (result.score !== resumeData.atsScore) {
+            onUpdate({ ...resumeData, atsScore: result.score });
+          }
+        }).catch(err => {
+          console.error("Auto-score failed:", err);
+        });
+      }
+    }, 1000); // 1-second debounce
+
+    return () => clearTimeout(timer);
   }, [resumeData, jd, onUpdate]);
 
   /* ── Tailor bullets + skills ── */
