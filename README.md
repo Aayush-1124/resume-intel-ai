@@ -326,4 +326,4 @@ Built on a hand-crafted Material 3-inspired token system with full dual-theme:
 
 ---
 
-*Built with ❤️ by [Aayush](https://github.com/Aayush-1124) · Powered by Google Gemini AI*
+*Built with ❤️ by [Aayush](https://github.com/Aayush-1124) ·
