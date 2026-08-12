@@ -6,82 +6,86 @@
    DARK THEME — "The Digital Architect"
    ══════════════════════════════════════════════════════════ */
 :root, .dark {
-  --background:                #0b1326;
-  --surface:                   #0b1326;
-  --surface-dim:               #0b1326;
-  --surface-bright:            #31394d;
-  --surface-container-lowest:  #060e20;
-  --surface-container-low:     #131b2e;
-  --surface-container:         #171f33;
-  --surface-container-high:    #222a3d;
-  --surface-container-highest: #2d3449;
-  --surface-variant:           #2d3449;
-  --on-surface:                #dae2fd;
-  --on-surface-variant:        #c7c4d8;
-  --on-background:             #dae2fd;
-  --primary:                   #c3c0ff;
+  --background:                #090f1e;
+  --surface:                   #0d1525;
+  --surface-dim:               #0a1020;
+  --surface-bright:            #2a3348;
+  --surface-container-lowest:  #060c18;
+  --surface-container-low:     #111927;
+  --surface-container:         #162030;
+  --surface-container-high:    #1e2a3c;
+  --surface-container-highest: #263348;
+  --surface-variant:           #263348;
+  --on-surface:                #e2e8ff;
+  --on-surface-variant:        #c4c7e0;
+  --on-background:             #e2e8ff;
+  --primary:                   #a5a2ff;
   --primary-container:         #4f46e5;
-  --on-primary:                #1d00a5;
-  --on-primary-container:      #dad7ff;
-  --secondary:                 #b7c8e1;
-  --secondary-container:       #3a4a5f;
-  --on-secondary:              #213145;
-  --tertiary:                  #4edea3;
-  --tertiary-container:        #006e4b;
-  --on-tertiary:               #003824;
-  --on-tertiary-container:     #67f4b7;
+  --on-primary:                #ffffff;
+  --on-primary-container:      #ddd9ff;
+  --secondary:                 #9bb8d8;
+  --secondary-container:       #2e3e54;
+  --on-secondary:              #ffffff;
+  --tertiary:                  #3dd9a0;
+  --tertiary-container:        #005c3e;
+  --on-tertiary:               #ffffff;
+  --on-tertiary-container:     #5ff2b5;
   --error:                     #ffb4ab;
   --error-container:           #93000a;
-  --outline:                   #918fa1;
-  --outline-variant:           #464555;
+  --outline:                   #7e7c94;
+  --outline-variant:           #3c3b52;
   --inverse-primary:           #4d44e3;
 
-  --glass-bg:        rgba(45, 52, 73, 0.60);
-  --glass-panel-bg:  rgba(45, 52, 73, 0.40);
-  --scrollbar-thumb: #464555;
-  --shadow-glow:     rgba(218, 226, 253, 0.05);
-  --nav-shadow:      0 2px 40px rgba(218, 226, 253, 0.05);
+  --glass-bg:        rgba(30, 42, 60, 0.65);
+  --glass-panel-bg:  rgba(22, 32, 48, 0.50);
+  --scrollbar-thumb: #3c3b52;
+  --shadow-glow:     rgba(165, 162, 255, 0.08);
+  --nav-shadow:      0 2px 40px rgba(165, 162, 255, 0.06);
+  --card-border:     rgba(165, 162, 255, 0.08);
+  --glow-primary:    0 0 40px rgba(79, 70, 229, 0.25);
 }
 
 /* ══════════════════════════════════════════════════════════
    LIGHT THEME — "The Architectural Glasshouse"
    ══════════════════════════════════════════════════════════ */
 .light {
-  --background:                #f7f9fb;
-  --surface:                   #f7f9fb;
-  --surface-dim:               #e6e8ea;
+  --background:                #f4f6fb;
+  --surface:                   #f4f6fb;
+  --surface-dim:               #e4e7ee;
   --surface-bright:            #ffffff;
   --surface-container-lowest:  #ffffff;
-  --surface-container-low:     #f2f4f6;
-  --surface-container:         #eceef0;
-  --surface-container-high:    #e6e8ea;
-  --surface-container-highest: #dfe1e3;
-  --surface-variant:           #e0e3e5;
-  --on-surface:                #191c1e;
-  --on-surface-variant:        #46474f;
-  --on-background:             #191c1e;
-  --primary:                   #3525cd;
+  --surface-container-low:     #eef0f6;
+  --surface-container:         #e8eaf2;
+  --surface-container-high:    #e0e3ee;
+  --surface-container-highest: #d8dce9;
+  --surface-variant:           #dde0ec;
+  --on-surface:                #14181f;
+  --on-surface-variant:        #42465a;
+  --on-background:             #14181f;
+  --primary:                   #3829d0;
   --primary-container:         #4f46e5;
   --on-primary:                #ffffff;
   --on-primary-container:      #ffffff;
-  --secondary:                 #565e74;
-  --secondary-container:       #dae2fd;
+  --secondary:                 #4e5870;
+  --secondary-container:       #dde1fd;
   --on-secondary:              #ffffff;
-  --tertiary:                  #005338;
-  --tertiary-container:        #c8fde0;
+  --tertiary:                  #00553a;
+  --tertiary-container:        #c2fde0;
   --on-tertiary:               #ffffff;
-  --on-tertiary-container:     #002113;
-  --error:                     #ba1a1a;
+  --on-tertiary-container:     #001f12;
+  --error:                     #b91c1c;
   --error-container:           #ffdad6;
-  --outline:                   #777587;
-  --outline-variant:           #c7c4d8;
-  --inverse-primary:           #c3c0ff;
+  --outline:                   #70708a;
+  --outline-variant:           #c2c0d8;
+  --inverse-primary:           #a5a2ff;
 
-  --glass-bg:        rgba(255, 255, 255, 0.75);
-  --glass-panel-bg:  rgba(255, 255, 255, 0.55);
-  --scrollbar-thumb: #c7c4d8;
-  --shadow-glow:     rgba(25, 28, 30, 0.06);
-  --nav-shadow:      0 1px 0 rgba(0,0,0,0.08), 0 4px 24px rgba(25,28,30,0.06);
+  --glass-bg:        rgba(255, 255, 255, 0.80);
+  --glass-panel-bg:  rgba(255, 255, 255, 0.60);
+  --scrollbar-thumb: #c2c0d8;
+  --shadow-glow:     rgba(20, 24, 31, 0.06);
+  --nav-shadow:      0 1px 0 rgba(0,0,0,0.06), 0 4px 24px rgba(20,24,31,0.06);
+  --card-border:     rgba(79, 70, 229, 0.10);
+  --glow-primary:    0 0 40px rgba(79, 70, 229, 0.12);
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -127,16 +131,21 @@
     width: 100%;
     background-color: var(--surface-container-lowest);
     color: var(--on-surface);
-    border: none;
+    border: 1px solid transparent;
     border-radius: 0.75rem;
     padding: 0.75rem 1rem;
     font-size: 0.875rem;
     font-family: 'Inter', sans-serif;
     outline: none;
-    transition: box-shadow 0.2s ease, background-color 0.2s ease;
+    transition: box-shadow 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+  }
+  .field-input:hover:not(:focus):not(:disabled) {
+    background-color: var(--surface-container-low);
+    border-color: var(--outline-variant);
   }
   .field-input:focus {
-    box-shadow: 0 0 0 1.5px var(--primary-container);
+    box-shadow: 0 0 0 2px var(--primary-container);
+    border-color: var(--primary-container);
   }
   .field-input::placeholder {
     color: var(--outline);
@@ -144,6 +153,7 @@
   }
   .field-input.error-ring {
     box-shadow: 0 0 0 1.5px var(--error);
+    border-color: var(--error);
   }
   .field-input:disabled {
     opacity: 0.4;
@@ -167,10 +177,18 @@
     color: var(--on-primary);
     font-weight: 700;
     border-radius: 0.75rem;
-    transition: opacity 0.2s, transform 0.1s;
+    transition: opacity 0.18s, transform 0.12s, box-shadow 0.18s;
+    box-shadow: 0 2px 12px rgba(79, 70, 229, 0.22);
   }
-  .btn-primary:hover { opacity: 0.9; }
+  .btn-primary:hover {
+    opacity: 0.92;
+    box-shadow: 0 4px 20px rgba(79, 70, 229, 0.35);
+  }
   .btn-primary:active { transform: scale(0.97); }
+  .btn-primary:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
 
   /* Smooth theme transitions for specific props */
   .theme-transition {
@@ -179,6 +197,43 @@
       color 0.3s ease,
       border-color 0.3s ease,
       box-shadow 0.3s ease;
+  }
+
+  /* Feature card — used by new panels */
+  .feature-card {
+    background: var(--surface-container);
+    border: 1px solid var(--card-border, rgba(165,162,255,0.08));
+    border-radius: 1rem;
+    transition: box-shadow 0.22s ease, border-color 0.22s ease, transform 0.18s ease;
+    will-change: transform;
+  }
+  .feature-card:hover {
+    border-color: rgba(165,162,255,0.22);
+    box-shadow: var(--glow-primary, none);
+    transform: translateY(-1px);
+  }
+
+  /* Tag pill */
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* Section header inside panels */
+  .section-header {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--on-surface-variant);
+    opacity: 0.7;
   }
 }
 
@@ -198,6 +253,57 @@
 
   .gradient-primary {
     background: linear-gradient(135deg, var(--primary-container), var(--primary));
+  }
+
+  /* Skeleton shimmer for loading states */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--surface-container-low) 25%,
+      var(--surface-container-high) 50%,
+      var(--surface-container-low) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+    border-radius: 0.5rem;
+  }
+  @keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* Fade-in for lazily mounted panels */
+  .fade-in {
+    animation: fadeIn 0.22s ease both;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Focus ring for keyboard nav on interactive elements */
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 0.5rem;
+  }
+
+  /*
+   * Active step indicator in FormSidebar.
+   * On mobile (< lg) — bottom border highlight.
+   * On desktop (≥ lg) — left border highlight + slight indent.
+   * Using pure CSS avoids the window.innerWidth-in-JSX anti-pattern.
+   */
+  .step-active {
+    border-bottom: 3px solid var(--primary-container);
+    border-left:   3px solid transparent;
+  }
+  @media (min-width: 1024px) {
+    .step-active {
+      border-bottom: 3px solid transparent;
+      border-left:   3px solid var(--primary-container);
+      transform: translateX(3px);
+    }
   }
 }
 

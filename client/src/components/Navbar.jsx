@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Sun, Moon, LayoutDashboard, LayoutTemplate, FileCheck2, Briefcase, Menu, X } from 'lucide-react';
+import { Sparkles, Sun, Moon, LayoutDashboard, LayoutTemplate, FileCheck2, Briefcase, Menu, X, Wand2 } from 'lucide-react';
 
 const NAV_LINKS = [
-  { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { id: 'templates', label: 'Templates', icon: LayoutTemplate },
-  { id: 'ats-check', label: 'ATS Check', icon: FileCheck2 },
-  { id: 'jobs', label: 'Find Jobs', icon: Briefcase },
+  { id: 'dashboard', label: 'Dashboard',  icon: LayoutDashboard },
+  { id: 'templates', label: 'Templates',  icon: LayoutTemplate  },
+  { id: 'ats-check', label: 'ATS + AI',   icon: Wand2           },
+  { id: 'jobs',      label: 'Find Jobs',  icon: Briefcase       },
 ];
 
 export default function Navbar({ activePage, activeStep, onNavigate, onOpenTemplates, isDark, onThemeToggle }) {

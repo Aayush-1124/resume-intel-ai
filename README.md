@@ -1,6 +1,6 @@
-# ResumeIntel AI — Production-Ready AI Resume Builder
+# ResumeIntel AI — The Complete AI Job-Search Toolkit
 
-> **Surgical Precision for your Career Path.** Upload your resume, tailor it to any job description with AI, and download a pixel-perfect, ATS-optimised PDF or DOCX — in seconds.
+> **From resume to offer-ready in four steps.** Upload your resume, score it against any job description, tailor every bullet with AI, generate a cover letter, prep for interviews, and download a pixel-perfect PDF — no account required.
 
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/Vite-5-646CFF?logo=vite)](https://vitejs.dev/)
@@ -13,23 +13,29 @@
 
 ## ✨ Features
 
+### ⚡ Instant Tools — No AI Quota Consumed
+
 | Feature | Description |
 |---|---|
-| **Universal File Parser** | Upload any resume — PDF or DOCX, up to **10 MB**. Every file type is parsed accurately via Gemini AI. |
-| **6 Resume Templates** | Classic, Modern, Minimal, Executive, Tech (Impact), Compact — live preview, instant switching, template shuffler FAB |
-| **Multi-Step Form Editor** | 6-step editor — Personal · Experience · Projects · Education · Skills · AI Optimizer |
-| **AI Tailor Engine** | Paste a job description → AI rewrites weak bullets to match JD keywords (hybrid approach: 50–70% fewer tokens) |
-| **ATS Scorer (Debounced)** | 0–100% weighted ATS score + missing keyword list + actionable remarks. Auto-rescores with a 1-second debounce to avoid API spam |
-| **Smart Skill Inject** | One-click injection of missing JD keywords into Skills using a built-in tech taxonomy |
-| **Diff Preview** | Inline accept/reject individual AI-tailored bullets before committing |
-| **Dual Export** | Download your resume as **PDF** (print engine) or **DOCX** for every template |
-| **Find Jobs + Match Resume** | Integrated job search (SerpApi) with 5 smart error states (offline, rate limit, 404, 500, no results) and popular role suggestions |
-| **Friendly Error System** | Every API error (404, 429, 500, 502, 503, 505) shows a human-readable popup with a Retry button — no raw codes ever shown |
-| **Dark / Light Theme** | Full dual-theme with system preference detection and smooth transitions |
-| **Auto-Save** | All edits debounced 500ms and persisted to `localStorage` — no auth required |
-| **Code-Split Pages** | LandingPage, DashboardPage, JobsPage are lazily loaded (React.lazy + Suspense) — faster initial load |
-| **Granular Error Boundaries** | Each page wrapped in its own ErrorBoundary — one crash can't take down the whole app |
-| **Fully Responsive** | Mobile-first layout with Editor / Preview tab switcher on small screens |
+| **ATS Compatibility Score** | Weighted 0–100 score across keyword match (50 pts), contextual bullet placement (20 pts), quantified metrics (15 pts), and action verb quality (15 pts). Auto-rescores with a 1 s debounce as you edit. |
+| **Keyword Breakdown** | Every JD keyword categorised — Languages · Frameworks & Libraries · Tools & Platforms · Concepts — each with a plain-English explanation of why it matters to recruiters. Zero AI calls. |
+| **AI Diff Preview** | Side-by-side before/after view for every AI-tailored bullet. Accept all, reject all, or cherry-pick and edit individual changes before committing to your resume. |
+| **Version History** | Auto-snapshots saved to MongoDB on every PDF/DOC export. Browse a timestamped timeline, label key versions (e.g. "Before AI tailor"), and restore any snapshot in one click. Capped at 20 versions per resume. |
+| **Smart Skill Inject** | One-click injection of missing JD keywords into your Skills section, automatically categorised by the built-in tech taxonomy (100+ terms). |
+| **6 Resume Templates** | Classic · Modern · Minimal · Executive · Tech · Compact — live preview, instant switching via the template shuffler FAB, all ATS-safe with print-optimised layouts. |
+| **Dual Export** | Download as **PDF** (browser print engine — crisp vector text, selectable content) or **DOCX** for every template. |
+| **Auto-Save** | All edits debounced 500 ms and persisted to `localStorage`. No auth required. |
+
+### 🤖 AI-Powered Features — Google Gemini
+
+| Feature | Description |
+|---|---|
+| **AI Resume Parser** | Upload any PDF or DOCX (≤ 10 MB). Pre-processes raw text (normalises bullets, deduplicates lines, strips control chars) before sending to Gemini. Handles multi-column layouts, 6+ section-heading aliases per section, international phone formats, and cleanly separates projects from work experience. |
+| **AI Tailor Engine** | Paste a JD → AI identifies weak bullets (< 2 keyword matches) and rewrites only those, naturally incorporating JD keywords while preserving your authentic voice and real achievements. |
+| **AI Recruiter Review** | Qualitative feedback from a simulated senior recruiter: overall verdict + 1–10 score, section-by-section grades (Summary · Experience · Impact · ATS Readiness), green flags, red flags, and a single top-priority action to take today. On-demand only — never auto-fires. |
+| **Cover Letter Generator** | One click produces a JD-tailored cover letter in your chosen tone (Professional · Enthusiastic · Concise). Includes a suggested email subject line and the 3 key selling points emphasised. Edit inline, copy, or download as `.txt`. |
+| **Interview Question Generator** | Role-specific question bank: Behavioral (with STAR starters + why interviewers ask it), Technical (with difficulty rating + key concepts to cover), Role-Specific, and 4 smart questions to ask your interviewer. |
+| **Find Jobs** | Integrated job search (SerpApi) with popular role suggestions, 5 graceful error states, and server-side LRU caching. |
 
 ---
 
@@ -67,9 +73,9 @@ SERP_API_KEY=YOUR_SERPAPI_KEY        # optional — needed for Find Jobs
 FRONTEND_URL=http://localhost:5173
 ```
 
-> **⚠️ SRV DNS Issue?** Some ISPs (especially in India) block SRV DNS lookups. If you see `querySrv ECONNREFUSED`:
-> 1. In MongoDB Atlas → **Connect** → **Drivers** → copy the non-SRV connection string
-> 2. Or switch your DNS to `8.8.8.8` (Google) / `1.1.1.1` (Cloudflare)
+> **⚠️ SRV DNS Issue?** Some ISPs block SRV DNS lookups. If you see `querySrv ECONNREFUSED`:
+> - In MongoDB Atlas → **Connect** → **Drivers** → copy the non-SRV connection string, or
+> - Switch your DNS to `8.8.8.8` (Google) / `1.1.1.1` (Cloudflare)
 
 ### 3. Run Development Servers
 
@@ -78,7 +84,7 @@ FRONTEND_URL=http://localhost:5173
 npm run dev
 ```
 
-Then open **http://localhost:5173**
+Open **http://localhost:5173**
 
 ---
 
@@ -87,30 +93,25 @@ Then open **http://localhost:5173**
 ### Backend → Render
 
 1. Push to GitHub
-2. Create a new **Web Service** on [Render](https://render.com)
-3. Set **Root Directory** to `server`, **Build Command** to `npm install`, **Start Command** to `npm start`
-4. Add environment variables: `MONGODB_URI`, `GEMINI_API_KEY`, `SERP_API_KEY`, `FRONTEND_URL` (your Vercel URL)
+2. New **Web Service** on [Render](https://render.com) — Root: `server`, Build: `npm install`, Start: `npm start`
+3. Add env vars: `MONGODB_URI`, `GEMINI_API_KEY`, `SERP_API_KEY`, `FRONTEND_URL` (your Vercel URL)
 
 ### Frontend → Vercel
 
-1. Import your GitHub repo on [Vercel](https://vercel.com)
-2. Set **Root Directory** to `client`
-3. Add environment variable:
+1. Import repo on [Vercel](https://vercel.com), set Root Directory to `client`
+2. Add env var:
    ```
    VITE_API_URL=https://your-backend.onrender.com/api
    ```
-4. Deploy — Vercel auto-builds on every push
+3. Deploy — auto-builds on every push
 
 ### Keep the Server Warm (Free Tier)
 
-Render free-tier services spin down after 15 minutes of inactivity. The first request after spin-down takes ~30 seconds. To prevent this:
+Render free-tier services spin down after 15 min of inactivity (~30 s cold start). Prevent it:
 
-1. Go to [cron-job.org](https://cron-job.org) or [UptimeRobot](https://uptimerobot.com) (both free)
-2. Add a new monitor/cron pointing to:
-   ```
-   https://your-backend.onrender.com/api/health
-   ```
-3. Set interval to **every 14 minutes** — keeps the server always warm with zero code changes
+1. [cron-job.org](https://cron-job.org) or [UptimeRobot](https://uptimerobot.com) — both free
+2. Point to: `https://your-backend.onrender.com/api/health`
+3. Interval: **every 14 minutes**
 
 ---
 
@@ -118,64 +119,68 @@ Render free-tier services spin down after 15 minutes of inactivity. The first re
 
 ```
 resume-intel/
-├── server/                          # Node.js + Express + MongoDB
+├── server/                              # Node.js + Express + MongoDB
 │   ├── src/
-│   │   ├── index.js                 # Express entry, CORS, MongoDB connect, errorHandler
+│   │   ├── index.js                     # Express entry, CORS, MongoDB connect
 │   │   ├── models/
-│   │   │   └── Resume.js            # Mongoose resume schema
+│   │   │   └── Resume.js                # Mongoose schema — resume + versions[]
 │   │   ├── routes/
-│   │   │   ├── ai.js                # /api/ai — parse, tailor, ATS score, skills
-│   │   │   ├── resume.js            # /api/resumes — CRUD
-│   │   │   └── jobs.js              # /api/jobs — SerpApi job search + LRU cache
+│   │   │   ├── ai.js                    # 8 AI/analysis endpoints (see API ref)
+│   │   │   ├── resume.js                # 6 resume + version-history endpoints
+│   │   │   └── jobs.js                  # SerpApi job search + LRU cache
 │   │   ├── middleware/
-│   │   │   ├── errorHandler.js      # Centralised structured error responses
-│   │   │   └── validate.js          # Zod request validation middleware
+│   │   │   ├── errorHandler.js          # Centralised structured error responses
+│   │   │   ├── validate.js              # Zod request validation middleware
+│   │   │   └── rateLimiter.js           # 3-tier in-memory rate limiter (no deps)
 │   │   └── utils/
-│   │       ├── cache.js             # LRU in-memory cache with TTL
-│   │       ├── logger.js            # Pino structured logger
-│   │       └── fetchWithRetry.js    # Exponential backoff retry helper
+│   │       ├── cache.js                 # LRU cache — per-entry TTL, max 200 entries
+│   │       ├── inflightCache.js         # In-flight request deduplication
+│   │       ├── logger.js                # Pino structured logger
+│   │       └── fetchWithRetry.js        # Exponential backoff retry (1 s → 2 s → 4 s)
 │   ├── .env.example
 │   └── package.json
 │
-└── client/                          # React 18 + Vite + Tailwind CSS
-    ├── index.html                   # Entry HTML with SEO meta tags
-    ├── vite.config.js               # Vite config with manual chunk splitting
-    ├── tailwind.config.js           # Design token mapping
+└── client/                              # React 18 + Vite + Tailwind CSS
+    ├── index.html
+    ├── tailwind.config.js               # Design token → Tailwind colour mapping
     └── src/
-        ├── App.jsx                  # Root router + theme + localStorage + lazy pages
-        ├── main.jsx                 # ReactDOM entry + global ErrorBoundary
-        ├── index.css                # Design system tokens + utilities
+        ├── App.jsx                      # Root router + theme + localStorage + lazy pages
+        ├── index.css                    # Material 3-inspired design tokens (dark + light)
         ├── pages/
-        │   ├── LandingPage.jsx      # Hero, file upload, feature bento grid
-        │   ├── DashboardPage.jsx    # 3-panel editor (nav + form + preview)
-        │   └── JobsPage.jsx         # Integrated job search with 5 error states
+        │   ├── LandingPage.jsx          # Hero, upload zone, stats, feature grids, CTA
+        │   ├── DashboardPage.jsx        # 3-panel editor (sidebar + form + preview)
+        │   └── JobsPage.jsx             # Integrated job search
         ├── components/
-        │   ├── Navbar.jsx           # Responsive top nav + theme toggle
-        │   ├── FormSidebar.jsx      # Step progress + PDF/DOCX download buttons
-        │   ├── ResumePreview.jsx    # 6 live template renderers (print-safe)
-        │   ├── ATSScoreWidget.jsx   # Animated SVG ring score widget
-        │   ├── TemplateShuffler.jsx # Floating template switcher FAB
-        │   ├── TemplateModal.jsx    # Full template selection modal
-        │   ├── DiffPreview.jsx      # Per-bullet AI diff accept/reject UI
-        │   ├── templateThumbnails.jsx # SVG micro-previews for each template
-        │   ├── JobSuccessModal.jsx  # Post-download job search prompt
-        │   ├── ToastContainer.jsx   # Global toasts (with Retry button + aria-live)
-        │   ├── ErrorBoundary.jsx    # Per-page React error boundary
+        │   ├── Navbar.jsx               # Responsive nav + mobile hamburger + theme toggle
+        │   ├── FormSidebar.jsx          # Step progress + download + version history (CSS-only active state)
+        │   ├── ResumePreview.jsx        # 6 live template renderers (memo-ised, print-safe)
+        │   ├── ATSScoreWidget.jsx       # Animated SVG ring score overlay (memo-ised)
+        │   ├── TemplateShuffler.jsx     # Floating template switcher FAB
+        │   ├── TemplateModal.jsx        # Full template selection modal
+        │   ├── DiffPreview.jsx          # Per-bullet AI diff accept/reject UI (lazy-loaded)
+        │   ├── KeywordBreakdownPanel.jsx # Categorised keyword analysis (no AI)
+        │   ├── RecruiterReviewPanel.jsx  # AI recruiter feedback panel (on-demand)
+        │   ├── CoverLetterModal.jsx      # AI cover letter generator + editor (lazy-loaded)
+        │   ├── InterviewQuestionsModal.jsx # AI interview question bank (lazy-loaded)
+        │   ├── VersionHistoryPanel.jsx   # Timeline browser + restore (lazy-loaded)
+        │   ├── JobSuccessModal.jsx       # Post-download job search prompt (lazy-loaded)
+        │   ├── ToastContainer.jsx        # Global toasts with Retry button
+        │   ├── ErrorBoundary.jsx         # Per-page React error boundary
         │   └── form-steps/
-        │       ├── PersonalForm.jsx
+        │       ├── PersonalForm.jsx      # sanitizeUrl for links, sanitizeTextarea for summary
         │       ├── ExperienceForm.jsx
-        │       ├── ProjectsForm.jsx
-        │       ├── EducationForm.jsx
+        │       ├── ProjectsForm.jsx      # sanitizeUrl on project link field
+        │       ├── EducationForm.jsx     # sanitizeTextarea on achievements field
         │       ├── SkillsForm.jsx
-        │       └── AIOptimizerForm.jsx   # Debounced ATS auto-scorer
+        │       └── AIOptimizerForm.jsx  # Tabbed: ATS Optimizer · Keywords · Review
         ├── hooks/
-        │   ├── useLocalStorage.js   # Debounced localStorage persistence
-        │   └── useTheme.js          # System theme detection + toggle
+        │   ├── useLocalStorage.js       # Debounced localStorage persistence
+        │   └── useTheme.js              # System theme detection + toggle
         └── utils/
-            ├── api.js               # Typed API helper + default resume data
-            ├── apiClient.js         # Fetch wrapper: maps every HTTP/error code → friendly message
-            ├── docxExport.js        # DOCX export utility
-            └── validation.js        # Form validation rules
+            ├── api.js                   # Typed API helper — all 14 client methods
+            ├── apiClient.js             # Fetch wrapper — every error → friendly message
+            ├── docxExport.js            # DOCX export utility
+            └── validation.js            # Sanitizers + form validators
 ```
 
 ---
@@ -184,71 +189,90 @@ resume-intel/
 
 ### AI Routes (`/api/ai`)
 
-| Method | Endpoint | Description | AI? |
-|---|---|---|---|
-| `POST` | `/api/ai/parse-doc` | Upload PDF/DOCX (≤10 MB) → structured resume JSON | ✅ Gemini |
-| `POST` | `/api/ai/tailor` | `{ experience, skills, jobDescription }` → tailored bullets | ✅ Partial |
-| `POST` | `/api/ai/ats-score` | `{ resumeData, jobDescription }` → score 0–100 + missing keywords | ❌ Local |
-| `POST` | `/api/ai/organize-skills` | `{ currentSkills, missingKeywords }` → injected skills | ❌ Local |
+| Method | Endpoint | Rate Limit | Description | AI? |
+|---|---|---|---|---|
+| `POST` | `/api/ai/parse-doc` | 10/min | Upload PDF/DOCX (≤ 10 MB) → structured resume JSON. Results cached 24 h by content fingerprint. | ✅ Gemini |
+| `POST` | `/api/ai/tailor` | 20/min | `{ experience, skills, jobDescription }` → tailored bullets. Only weak bullets sent to Gemini. | ✅ Partial |
+| `POST` | `/api/ai/ats-score` | 60/min | `{ resumeData, jobDescription }` → weighted score 0–100 + missing keywords | ❌ Local |
+| `POST` | `/api/ai/organize-skills` | 60/min | `{ currentSkills, missingKeywords }` → categorised skills injection | ❌ Local |
+| `POST` | `/api/ai/keyword-explain` | 60/min | `{ resumeData, jobDescription }` → matched/missing keywords with category + why | ❌ Local |
+| `POST` | `/api/ai/recruiter-review` | 20/min | `{ resumeData, jobDescription? }` → qualitative recruiter-style feedback. Cached 1 h. | ✅ Gemini |
+| `POST` | `/api/ai/cover-letter` | 20/min | `{ resumeData, jobDescription, tone }` → subject + body + highlights. Cached 1 h. | ✅ Gemini |
+| `POST` | `/api/ai/interview-questions` | 20/min | `{ resumeData, jobDescription }` → behavioral + technical + role Q&A bank. Cached 1 h. | ✅ Gemini |
+
+> **Rate limits** are per IP, per 60-second sliding window. Exceeded requests return `429` with `Retry-After` and `X-RateLimit-*` headers.
 
 ### Resume Routes (`/api/resumes`)
 
 | Method | Endpoint | Description |
 |---|---|---|
 | `GET` | `/api/resumes/:localId` | Fetch saved resume |
-| `POST` | `/api/resumes/save` | Upsert resume by localId |
-| `DELETE` | `/api/resumes/:localId` | Delete resume |
+| `POST` | `/api/resumes/save` | Upsert resume by localId + push version snapshot |
+| `GET` | `/api/resumes/:localId/versions` | List version summaries (newest first, no snapshots) |
+| `GET` | `/api/resumes/:localId/versions/:versionId` | Fetch full version snapshot for restore |
+| `PATCH` | `/api/resumes/:localId/versions/:versionId/label` | Rename a version label |
+| `DELETE` | `/api/resumes/:localId` | Delete resume + all versions |
 
 ### Job Routes (`/api/jobs`)
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `GET` | `/api/jobs?q=role&location=city` | SerpApi job search with LRU cache |
+| `GET` | `/api/jobs?query=role&location=city` | SerpApi job search with server-side LRU cache |
 
 ### Health
 
 | Method | Endpoint | Description |
 |---|---|---|
-| `GET` | `/api/health` | Returns `{ status: "ok", timestamp }` — used by keep-alive pings |
+| `GET` | `/api/health` | `{ status: "ok", timestamp }` — used by keep-alive pings |
 
 ---
 
-## 🎨 Error Handling System
+## 🎨 Error Handling
 
-Every error — whether from the network, server, or AI quota — is mapped to a human-friendly message. Users **never see raw HTTP status codes**.
+Every error — network, server, AI quota — maps to a human-readable message. Users **never see raw HTTP codes**.
 
 | Status / Code | User-Facing Message |
 |---|---|
-| 404 | 🔍 "Endpoint not found — this might be temporary, try again" |
-| 429 / `RESOURCE_EXHAUSTED` | 🚦 "Rate limit reached — please wait a moment" |
+| 429 / `RATE_LIMIT_EXCEEDED` | 🚦 "Too many requests — please wait a moment and try again" |
+| 429 / `RESOURCE_EXHAUSTED` | 🚦 "AI quota reached — wait 60 s and retry. ATS scoring and keywords never consume quota." |
 | 500 / `INTERNAL_SERVER_ERROR` | 🛠️ "Server error — we're on it, your data is safe" |
 | 502 / 503 / 504 | 🚧 "Server under heavy traffic — try again shortly" |
-| 505 | 🔧 "Unsupported request — please refresh" |
+| AI timeout | ⏱️ "AI is taking too long — try again shortly" |
 | Offline | 📡 "No internet connection — check your network" |
 | Network failure | 🌐 "Can't reach the server — possibly heavy traffic" |
 
-Retryable errors show a **"Try Again"** button directly inside the toast notification.
+Retryable errors show a **"Try Again"** button inside the toast.
 
 ---
 
 ## 🎨 Design System — "Digital Architect"
 
-Built on a hand-crafted Material 3-inspired token system with full dual-theme:
+Material 3-inspired token system with full dual-theme support and smooth transitions.
 
 | Token | Dark | Light |
 |---|---|---|
-| `--background` | `#0b1326` | `#f7f9fb` |
-| `--primary` | `#c3c0ff` (Lavender) | `#3525cd` (Indigo) |
+| `--background` | `#090f1e` | `#f4f6fb` |
+| `--primary` | `#a5a2ff` (Lavender) | `#3829d0` (Indigo) |
 | `--primary-container` | `#4f46e5` | `#4f46e5` |
-| `--surface-container` | `#171f33` | `#eceef0` |
-| `--on-surface` | `#dae2fd` | `#191c1e` |
+| `--on-primary` | `#ffffff` | `#ffffff` |
+| `--tertiary` | `#3dd9a0` (Mint) | `#00553a` (Forest) |
+| `--surface-container` | `#162030` | `#e8eaf2` |
+| `--on-surface` | `#e2e8ff` | `#14181f` |
 
 **Principles:**
-- **Glassmorphism** — Floating panels use `backdrop-blur` + semi-transparent backgrounds
-- **ATS-safe resume fonts** — All templates use `Arial / Calibri / Helvetica Neue`
-- **Print-safe layouts** — Multi-column templates use `display: table` for reliable page-breaks
-- **Spring animations** — Framer Motion with spring physics (`stiffness: 380, damping: 28`)
-- **Accessibility** — `aria-live`, `role="alert"`, `aria-label` on all interactive elements
+- **Glassmorphism** — floating panels use `backdrop-filter: blur` + semi-transparent backgrounds
+- **ATS-safe fonts** — all templates use `Arial / Calibri / Helvetica Neue`
+- **Print-safe layouts** — multi-column templates use `display: table` for reliable page-breaks
+- **Spring animations** — Framer Motion (`stiffness: 300, damping: 30`)
+- **Accessibility** — `aria-live`, `role="alert"`, `aria-pressed`, `aria-label` on all interactive elements
+- **High-contrast buttons** — `--on-primary: #ffffff` ensures readable text on all gradient buttons in both themes
+- **44 px touch targets** — all interactive elements meet mobile accessibility minimum on small screens
+
+**CSS utilities:**
+- `.skeleton` — shimmer loading placeholder
+- `.fade-in` — entrance animation for lazily mounted panels
+- `.step-active` — responsive sidebar active indicator (CSS-only, no `window.innerWidth`)
+- `.focus-ring` — keyboard navigation highlight
 
 ---
 
@@ -262,57 +286,83 @@ Built on a hand-crafted Material 3-inspired token system with full dual-theme:
 | Icons | Lucide React |
 | Backend | Node.js 18 + Express.js |
 | Database | MongoDB Atlas + Mongoose |
-| AI Engine | Google Gemini (`@google/genai`) |
+| AI Engine | Google Gemini 2.5 Flash (`@google/genai`) |
 | Document Parsing | `mammoth` (DOCX) + `pdf-parse` (PDF) |
 | PDF Export | `react-to-print` (browser print engine) |
 | DOCX Export | `docx` npm package |
 | Job Search | SerpApi |
-| Logging | Pino (structured JSON logs) |
+| Logging | Pino (structured JSON) |
+| Validation | Zod (server-side) + custom sanitizers (client-side) |
 | State Persistence | `localStorage` (client) + MongoDB (server) |
 
 ---
 
 ## ⚡ Performance
 
-| Optimization | Detail |
+| Optimisation | Detail |
 |---|---|
-| **Code splitting** | React.lazy for 3 pages — only the Dashboard JS loads when user enters dashboard |
-| **Vendor chunks** | `react/react-dom`, `framer-motion`, `lucide-react` in separate chunks |
-| **Debounced ATS scorer** | 1-second debounce prevents API spam while typing |
-| **Debounced saves** | localStorage writes debounced 500ms |
-| **LRU server cache** | Job search and AI responses cached server-side with TTL |
-| **Granular error boundaries** | Per-page boundaries — one crash can't take down the whole app |
+| **Code splitting** | `React.lazy` for pages + 5 heavy panels (`DiffPreview`, `JobSuccessModal`, `VersionHistoryPanel`, `CoverLetterModal`, `InterviewQuestionsModal`) — none loaded until opened |
+| **Component memoisation** | `ResumePreview` and `ATSScoreWidget` wrapped in `React.memo` — skip re-renders when unrelated state changes |
+| **Stable callbacks** | All event handlers in `DashboardPage` wrapped in `useCallback` — prevent child re-renders on every parent update |
+| **Debounced ATS scorer** | 1 s debounce + content-only fingerprint — compares only resume fields, not metadata, so storing the ATS score back doesn't trigger a second API call |
+| **Debounced saves** | `localStorage` writes debounced 500 ms |
+| **Per-route cache TTLs** | `parse-doc: 24 h` · AI endpoints `1 h` · `ats-score: 10 min` — was a flat 5 min for every endpoint |
+| **Parse-doc caching** | Same resume file cached 24 h by content fingerprint (length + head + tail) — repeat uploads never hit Gemini |
+| **Normalised cache keys** | JD whitespace collapsed before hashing — minor copy-paste differences don't create cache misses |
+| **In-flight deduplication** | `withInflight()` — simultaneous requests with the same key share one Gemini call instead of firing duplicates |
+| **Hybrid AI tailor** | Only weak bullets (< 2 keyword matches) sent to Gemini — 50–70% fewer tokens per tailor call |
+| **Granular error boundaries** | Per-page `ErrorBoundary` — one crash can't take down the whole app |
+| **Non-blocking version saves** | Version snapshots saved async after export — never blocks the download |
 
 ---
 
-## 🔒 Security Notes
+## 🔒 Security
 
 - **No auth required** — a UUID `localId` in `localStorage` identifies each session
-- **API key isolation** — Gemini and SerpApi keys are server-side only
-- **CORS** — Only `localhost:*`, `*.vercel.app`, and `FRONTEND_URL` are allowed
-- **File limits** — PDF/DOCX uploads capped at 10 MB server-side (Multer)
-- **Structured errors** — Server never leaks stack traces to the client
+- **API keys server-side only** — Gemini and SerpApi keys never reach the client
+- **CORS** — only `localhost:*`, `*.vercel.app`, and `FRONTEND_URL` are allowed
+- **File limits** — PDF/DOCX uploads hard-capped at 10 MB server-side (Multer)
+- **Structured errors** — server never leaks stack traces to the client
+- **Input validation** — all request bodies validated with Zod before processing
+- **Input sanitization** — client-side sanitizers strip HTML tags and the three HTML-breaking characters (`<`, `>`, backtick) while preserving apostrophes and quotes in real names and sentences
+- **URL sanitization** — `sanitizeUrl` blocks `javascript:`, `data:`, and `vbscript:` scheme injection on all URL-type fields (website, LinkedIn, project links)
+- **URL validation** — `validatePersonal` rejects malformed website and LinkedIn URLs before form submission
+- **Rate limiting** — three-tier in-memory limiter (no external dep): heavy AI 20/min · parse 10/min · light endpoints 60/min per IP. Returns standard `X-RateLimit-*` + `Retry-After` headers.
 - **`.env` gitignored** — only `.env.example` is committed
 
 ---
 
 ## 🗺️ Roadmap
 
-- [x] PDF/DOCX parsing (all file types, up to 10 MB)
-- [x] 6 resume templates with live preview + shuffler
-- [x] AI tailor with diff preview (accept/reject per bullet)
-- [x] ATS scoring + smart skill inject (debounced)
-- [x] Job search with Match My Resume toggle
+**Shipped ✅**
+- [x] PDF/DOCX parsing — multi-column, deduplication, 6+ section-heading aliases, international phone formats
+- [x] PDF pre-processing — bullet normalisation, control-char stripping, adjacent-line deduplication
+- [x] 6 resume templates with live preview + shuffler FAB
+- [x] AI tailor with per-bullet diff preview (accept / reject / edit)
+- [x] ATS scoring — weighted 4-factor algorithm, debounced auto-score (content-only fingerprint)
+- [x] Smart Skill Inject — one-click keyword injection via built-in taxonomy
+- [x] **Keyword Breakdown** — categorised keyword analysis with recruiter context (no AI)
+- [x] **Version History** — auto-snapshot on export, timeline UI, restore in one click
+- [x] **AI Recruiter Review** — qualitative section grades + green/red flags + top priority (on-demand)
+- [x] **Cover Letter Generator** — JD-tailored, 3 tones, inline editor, copy + download
+- [x] **Interview Question Generator** — behavioral + technical + role-specific + questions to ask
+- [x] Job search with 5 graceful error states
 - [x] Dual export — PDF + DOCX for every template
-- [x] Friendly error system (no raw HTTP codes shown)
-- [x] Dark/Light theme + system preference detection
-- [x] Responsive mobile layout
-- [x] Code splitting (React.lazy) + granular error boundaries
-- [ ] Authentication (Clerk or NextAuth)
-- [ ] Multiple resume versions per user
-- [ ] Cover letter generator
+- [x] Friendly error system — no raw HTTP codes, Retry buttons
+- [x] Dark / Light theme + system preference detection
+- [x] Fully responsive — CSS-only active states, 44 px touch targets, mobile Editor/Preview switcher
+- [x] Code splitting (React.lazy) + component memoisation + stable callbacks
+- [x] Per-route cache TTLs + parse-doc caching + in-flight deduplication
+- [x] Three-tier rate limiting (heavy · parse · light) with standard headers
+- [x] Input sanitization — HTML-safe sanitizers preserving real punctuation; URL scheme injection blocked
+- [x] Granular error boundaries
+
+**Planned 🔜**
+- [ ] Authentication (Clerk or NextAuth) + per-user resume storage
 - [ ] LinkedIn profile import
-- [ ] Resume version history
+- [ ] Multi-resume management per account
+- [ ] Resume score history chart (track improvement over time)
+- [ ] Collaborative editing / share-a-resume-link
 
 ---
 
@@ -320,9 +370,10 @@ Built on a hand-crafted Material 3-inspired token system with full dual-theme:
 
 | Issue | Workaround |
 |---|---|
-| Render backend cold start (~30s) | Use a keep-alive ping service (see [Keep the Server Warm](#keep-the-server-warm-free-tier)) |
+| Render backend cold start (~30 s) | Use a keep-alive ping service (see [Keep the Server Warm](#keep-the-server-warm-free-tier)) |
 | Scanned PDFs return empty data | Use a text-based PDF; scanned image-PDFs are not yet supported |
 | MongoDB SRV DNS blocked | Use direct connection string or switch DNS to `8.8.8.8` |
+| Gemini quota exceeded | Free tier has per-minute limits — wait 60 s and retry. Keyword Breakdown and ATS Scoring never consume quota. |
 
 ---
 

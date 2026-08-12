@@ -1,12 +1,12 @@
 /**
- * Simple in-memory LRU cache with TTL support.
- * - Max 100 entries
- * - 5-minute TTL per entry
- * - Auto-cleanup of expired entries on access
+ * LRU cache with per-entry TTL support.
+ * - Max 200 entries (increased from 100 to accommodate longer TTLs)
+ * - Default TTL: 60 minutes
+ * - Per-entry TTL via set(key, value, ttlSeconds)
  */
 
-const MAX_ENTRIES = 100;
-const TTL_MS = 5 * 60 * 1000; // 5 minutes
+const MAX_ENTRIES = 200;
+const DEFAULT_TTL_MS = 60 * 60 * 1000; // 60 minutes
 
 class LRUCache {
   constructor() {
@@ -37,39 +37,42 @@ class LRUCache {
    * Store a value in the cache.
    * @param {string} key
    * @param {any} value
+   * @param {number} [ttlSeconds] - TTL in seconds. Defaults to 60 minutes.
    */
-  set(key, value) {
-    // Delete first so re-insertion goes to end of Map
+  set(key, value, ttlSeconds) {
+    const ttlMs = ttlSeconds != null ? ttlSeconds * 1000 : DEFAULT_TTL_MS;
+
     if (this._map.has(key)) {
       this._map.delete(key);
     }
 
-    // Evict oldest entries if at capacity
     while (this._map.size >= MAX_ENTRIES) {
       const oldestKey = this._map.keys().next().value;
       this._map.delete(oldestKey);
     }
 
-    this._map.set(key, { value, expiresAt: Date.now() + TTL_MS });
+    this._map.set(key, { value, expiresAt: Date.now() + ttlMs });
   }
 
   /**
    * Check whether a non-expired entry exists for the given key.
    * @param {string} key
-   * @returns {boolean}
    */
   has(key) {
     const entry = this._map.get(key);
     if (!entry) return false;
-
     if (Date.now() > entry.expiresAt) {
       this._map.delete(key);
       return false;
     }
     return true;
   }
+
+  /** Current number of live (non-expired) entries */
+  get size() {
+    return this._map.size;
+  }
 }
 
-// Export a singleton instance
 const cache = new LRUCache();
 export default cache;

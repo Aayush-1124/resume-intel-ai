@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Trash2, PlusCircle, MinusCircle, AlertCircle } from 'lucide-react';
-import { sanitizeField, sanitizeBullet } from '../../utils/validation.js';
+import { sanitizeField, sanitizeBullet, sanitizeUrl } from '../../utils/validation.js';
 
 const newProject = () => ({
   id: crypto.randomUUID(),
@@ -40,8 +40,10 @@ export default function ProjectsForm({ data, onChange, onNext, onBack }) {
   const hasErrors = (errs) => errs.some(e => e !== null);
 
   const updateProj = (id, field, val) => {
-    const clean = field === 'title' || field === 'role' || field === 'link'
-      ? sanitizeField(val, 200) : val;
+    const clean = field === 'link'
+      ? sanitizeUrl(val)
+      : field === 'title' || field === 'role'
+        ? sanitizeField(val, 200) : val;
     const next = data.map((p) => p.id === id ? { ...p, [field]: clean } : p);
     onChange(next);
     if (touched[id]) setErrors(validate(next));

@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import { motion } from 'framer-motion';
 
-export default function ATSScoreWidget({ score }) {
+const ATSScoreWidget = memo(function ATSScoreWidget({ score }) {
   if (score === null || score === undefined) return null;
 
   const r      = 18;
@@ -42,4 +43,6 @@ export default function ATSScoreWidget({ score }) {
       </div>
     </motion.div>
   );
-}
+});
+
+export default ATSScoreWidget;

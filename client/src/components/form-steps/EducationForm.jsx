@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Trash2, AlertCircle } from 'lucide-react';
-import { validateEducation, hasErrors, sanitizeField } from '../../utils/validation.js';
+import { validateEducation, hasErrors, sanitizeField, sanitizeTextarea } from '../../utils/validation.js';
 
 const newEdu = () => ({
   id: crypto.randomUUID(),
@@ -30,7 +30,7 @@ export default function EducationForm({ data, onChange, onNext, onBack }) {
   const [touched, setTouched] = useState({});
 
   const updateEdu = (id, field, val) => {
-    const clean = field === 'achievements' ? val.slice(0, 500) : sanitizeField(val, 150);
+    const clean = field === 'achievements' ? sanitizeTextarea(val, 500) : sanitizeField(val, 150);
     const next  = data.map((e) => e.id === id ? { ...e, [field]: clean } : e);
     onChange(next);
     if (touched[id]) setErrors(validateEducation(next));

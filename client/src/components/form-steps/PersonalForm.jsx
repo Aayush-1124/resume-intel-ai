@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertCircle } from 'lucide-react';
-import { validatePersonal } from '../../utils/validation.js';
-import { sanitizeField, sanitizeUrl } from '../../utils/validation.js';
+import { validatePersonal, sanitizeField, sanitizeUrl, sanitizeTextarea } from '../../utils/validation.js';
 
 /* ── Reusable field ── */
 function Field({ label, id, type = 'text', value, onChange, onBlur, placeholder, required, error, maxLength, hint }) {
@@ -42,8 +41,9 @@ export default function PersonalForm({ data, onChange, onNext }) {
   const [touched, setTouched] = useState({});
 
   const sanitize = (field, val) => {
-    const isUrl = ['website', 'linkedin'].includes(field);
-    return isUrl ? sanitizeUrl(val) : sanitizeField(val, field === 'summary' ? 1000 : 200);
+    if (['website', 'linkedin'].includes(field)) return sanitizeUrl(val);
+    if (field === 'summary') return sanitizeTextarea(val, 1000);
+    return sanitizeField(val, 200);
   };
 
   const update = (field) => (val) => {

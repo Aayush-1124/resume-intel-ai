@@ -18,11 +18,26 @@ const EducationSchema = new mongoose.Schema({
   achievements: String,
 });
 
+const ProjectSchema = new mongoose.Schema({
+  title: String,
+  role: String,
+  link: String,
+  bullets: [String],
+});
+
+// Lightweight version snapshot — stores full resume JSON at a point in time
+const VersionSchema = new mongoose.Schema({
+  savedAt:  { type: Date, default: Date.now },
+  label:    { type: String, default: '' },  // e.g. "Before AI tailor", "After ATS fix"
+  snapshot: { type: mongoose.Schema.Types.Mixed }, // full resumeData JSON
+});
+
 const ResumeSchema = new mongoose.Schema(
   {
     localId: { type: String, required: true, unique: true }, // localStorage ID
     personal: {
       fullName: String,
+      role:     String,
       email: String,
       phone: String,
       location: String,
@@ -31,7 +46,8 @@ const ResumeSchema = new mongoose.Schema(
       summary: String,
     },
     experience: [ExperienceSchema],
-    education: [EducationSchema],
+    projects:   [ProjectSchema],
+    education:  [EducationSchema],
     skills: {
       technical: [String],
       soft: [String],
@@ -45,6 +61,12 @@ const ResumeSchema = new mongoose.Schema(
     },
     lastJD: String,
     atsScore: Number,
+
+    // Version history — capped at 20 snapshots (oldest pruned automatically)
+    versions: {
+      type: [VersionSchema],
+      default: [],
+    },
   },
   { timestamps: true }
 );
